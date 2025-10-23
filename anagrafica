@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inserimento dati dinamico</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    form {
+      width: 45%;
+    }
+
+    #contenitore {
+      width: 45%;
+      border: 1px solid #ccc;
+      padding: 15px;
+      background-color: #f9f9f9;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="formDati">
+    <h2>Inserisci i tuoi dati</h2>
+
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" required>
+
+    <label for="cognome">Cognome:</label>
+    <input type="text" id="cognome" required>
+
+    <label for="indirizzo">Indirizzo:</label>
+    <input type="text" id="indirizzo" required>
+
+    <button type="submit">Mostra dati</button>
+  </form>
+
+  <div id="contenitore">
+    <h2>Dati inseriti:</h2>
+    <p><strong>Nome:</strong> <span id="outNome">-</span></p>
+    <p><strong>Cognome:</strong> <span id="outCognome">-</span></p>
+    <p><strong>Indirizzo:</strong> <span id="outIndirizzo">-</span></p>
+  </div>
+
+  <script>
+    const form = document.getElementById('formDati');
+    const outNome = document.getElementById('outNome');
+    const outCognome = document.getElementById('outCognome');
+    const outIndirizzo = document.getElementById('outIndirizzo');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Evita il ricaricamento della pagina
+
+      const nome = document.getElementById('nome').value;
+      const cognome = document.getElementById('cognome').value;
+      const indirizzo = document.getElementById('indirizzo').value;
+
+      outNome.textContent = nome;
+      outCognome.textContent = cognome;
+      outIndirizzo.textContent = indirizzo;
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
