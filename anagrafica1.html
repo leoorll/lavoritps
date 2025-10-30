@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inserimento Dati Dinamico</title>
+  <title>Inserimento Anagrafica Utente</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -92,6 +92,18 @@
     <label for="indirizzo">Indirizzo:</label>
     <input type="text" id="indirizzo" required>
 
+    <label for="citta">Città:</label>
+    <input type="text" id="citta" required>
+
+    <label for="cap">CAP:</label>
+    <input type="text" id="cap" required>
+
+    <label for="eta">Età:</label>
+    <input type="number" id="eta" required>
+
+    <label for="dataNascita">Data di Nascita:</label>
+    <input type="date" id="dataNascita" required>
+
     <button type="submit">Mostra dati</button>
   </form>
 
@@ -101,6 +113,11 @@
       <p><strong>Nome:</strong> <span id="outNome">-</span></p>
       <p><strong>Cognome:</strong> <span id="outCognome">-</span></p>
       <p><strong>Indirizzo:</strong> <span id="outIndirizzo">-</span></p>
+      <p><strong>Città:</strong> <span id="outCitta">-</span></p>
+      <p><strong>CAP:</strong> <span id="outCap">-</span></p>
+      <p><strong>Età:</strong> <span id="outEta">-</span></p>
+      <p><strong>Data di Nascita:</strong> <span id="outDataNascita">-</span></p>
+      <h3>Generazione: <span id="outGenerazione">-</span></h3>
     </div>
   </div>
 
@@ -109,6 +126,21 @@
     const outNome = document.getElementById('outNome');
     const outCognome = document.getElementById('outCognome');
     const outIndirizzo = document.getElementById('outIndirizzo');
+    const outCitta = document.getElementById('outCitta');
+    const outCap = document.getElementById('outCap');
+    const outEta = document.getElementById('outEta');
+    const outDataNascita = document.getElementById('outDataNascita');
+    const outGenerazione = document.getElementById('outGenerazione');
+
+    const generazioni = [
+      { nome: 'Generazione Silenziosa', inizio: 1928, fine: 1945 },
+      { nome: 'Greatest Generation', inizio: 1901, fine: 1927 },
+      { nome: 'Baby Boomers', inizio: 1946, fine: 1964 },
+      { nome: 'Generazione X', inizio: 1965, fine: 1980 },
+      { nome: 'Millennials', inizio: 1981, fine: 1996 },
+      { nome: 'Generazione Z', inizio: 1997, fine: 2012 },
+      { nome: 'Generazione Alpha', inizio: 2013, fine: new Date().getFullYear() },
+    ];
 
     form.addEventListener('submit', function(event) {
       event.preventDefault();
@@ -116,10 +148,22 @@
       const nome = document.getElementById('nome').value;
       const cognome = document.getElementById('cognome').value;
       const indirizzo = document.getElementById('indirizzo').value;
+      const citta = document.getElementById('citta').value;
+      const cap = document.getElementById('cap').value;
+      const eta = document.getElementById('eta').value;
+      const dataNascita = new Date(document.getElementById('dataNascita').value);
+
+      const annoNascita = new Date().getFullYear() - eta;
+      const generazione = generazioni.find(g => annoNascita >= g.inizio && annoNascita <= g.fine);
 
       outNome.textContent = nome;
       outCognome.textContent = cognome;
       outIndirizzo.textContent = indirizzo;
+      outCitta.textContent = citta;
+      outCap.textContent = cap;
+      outEta.textContent = eta;
+      outDataNascita.textContent = dataNascita.toLocaleDateString();
+      outGenerazione.textContent = generazione ? generazione.nome : 'N/D';
 
       form.reset();
     });
