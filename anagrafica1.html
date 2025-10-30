@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
+      padding: 15px;
       margin: 0;
       display: flex;
       justify-content: space-around;
@@ -15,65 +15,72 @@
     }
 
     h1 {
-      font-size: 24px;
+      font-size: 20px;
+      margin-bottom: 15px;
     }
 
     form {
       width: 100%;
-      max-width: 400px;
-      padding: 20px;
+      max-width: 350px;
+      padding: 15px;
       background-color: #f9f9f9;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     }
 
     label {
-      font-size: 16px;
-      margin-top: 10px;
+      font-size: 14px;
+      margin-top: 8px;
       display: block;
     }
 
     input {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      margin-bottom: 15px;
+      padding: 8px;
+      margin-top: 4px;
+      margin-bottom: 12px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      font-size: 14px;
     }
 
     button {
-      background-color: #4CAF50;
+      background-color: #007BFF;
       color: white;
       border: none;
-      padding: 10px;
+      padding: 8px;
       cursor: pointer;
       width: 100%;
       border-radius: 4px;
+      font-size: 14px;
     }
 
     button:hover {
-      background-color: #45a049;
+      background-color: #0056b3;
     }
 
     #contenitore {
       width: 100%;
-      max-width: 400px;
-      padding: 20px;
+      max-width: 350px;
+      padding: 15px;
       background-color: #f9f9f9;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
       margin-left: 30px;
     }
 
     .result {
-      margin-top: 20px;
-      font-size: 16px;
+      margin-top: 15px;
+      font-size: 14px;
     }
 
     .result h3 {
-      margin-top: 20px;
-      font-size: 18px;
+      margin-top: 15px;
+      font-size: 16px;
+    }
+
+    p {
+      margin: 4px 0;
     }
 
   </style>
@@ -156,6 +163,7 @@
       const annoNascita = new Date().getFullYear() - eta;
       const generazione = generazioni.find(g => annoNascita >= g.inizio && annoNascita <= g.fine);
 
+      // Aggiornamento dei risultati
       outNome.textContent = nome;
       outCognome.textContent = cognome;
       outIndirizzo.textContent = indirizzo;
