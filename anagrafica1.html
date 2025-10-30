@@ -119,7 +119,6 @@
       <p><strong>Indirizzo:</strong> <span id="outIndirizzo">-</span></p>
       <p><strong>Città:</strong> <span id="outCitta">-</span></p>
       <p><strong>CAP:</strong> <span id="outCap">-</span></p>
-      <p><strong>Età:</strong> <span id="outEta">-</span></p>
       <p><strong>Data di Nascita:</strong> <span id="outDataNascita">-</span></p>
       <h3>Generazione: <span id="outGenerazione">-</span></h3>
     </div>
@@ -132,7 +131,6 @@
     const outIndirizzo = document.getElementById('outIndirizzo');
     const outCitta = document.getElementById('outCitta');
     const outCap = document.getElementById('outCap');
-    const outEta = document.getElementById('outEta');
     const outDataNascita = document.getElementById('outDataNascita');
     const outGenerazione = document.getElementById('outGenerazione');
 
@@ -154,7 +152,6 @@
       const indirizzo = document.getElementById('indirizzo').value;
       const citta = document.getElementById('citta').value;
       const cap = document.getElementById('cap').value;
-      const eta = document.getElementById('eta').value;
       const dataNascita = new Date(document.getElementById('dataNascita').value);
 
       const annoNascita = new Date().getFullYear() - eta;
@@ -166,7 +163,6 @@
       outIndirizzo.textContent = indirizzo;
       outCitta.textContent = citta;
       outCap.textContent = cap;
-      outEta.textContent = eta;
       outDataNascita.textContent = dataNascita.toLocaleDateString();
       outGenerazione.textContent = generazione ? generazione.nome : 'N/D';
 
