@@ -1,1 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subnet Mask Generator</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+  }
+  .card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    width: 300px;
+  }
+  input, button {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  button {
+    background: #00c6ff;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  button:hover { background: #0099cc; }
+  .output {
+    margin-top: 15px;
+    font-family: monospace;
+    background: rgba(0,0,0,0.3);
+    padding: 8px;
+    border-radius: 8px;
+  }
+  .bit1 { color: #00ff99; }
+  .bit0 { color: #ff5555; }
+</style>
+</head>
+<body>
 
+<h1>Subnet Mask Generator</h1>
+<div class="card">
+  <p>Inserisci il prefisso (es. <strong>24</strong>):</p>
+  <input type="number" id="prefix" min="0" max="32" placeholder="0–32">
+  <button onclick="calcolaMask()">Genera</button>
+  <div class="output" id="output"></div>
+</div>
+
+<script>
+function calcolaMask() {
+  const prefix = +document.getElementById('prefix').value;
+  const out = document.getElementById('output');
+  if (prefix < 0 || prefix > 32 || isNaN(prefix)) {
+    out.innerHTML = "❌ Inserisci un valore tra 0 e 32.";
+    return;
+  }
+
+  const full = Math.floor(prefix / 8);
+  const rem = prefix % 8;
+  const octets = Array.from({length: 4}, (_, i) =>
+    i < full ? "11111111" :
+    i === full ? "1".repeat(rem) + "0".repeat(8 - rem) :
+    "00000000"
+  );
+
+  const maskHTML = octets.map(o =>
+    o.replace(/./g, b => `<span class="bit${b}">${b}</span>`)
+  ).join(' . ');
+
+  out.innerHTML = `<strong>/${prefix}</strong><br>${maskHTML}`;
+}
+</script>
+
+</body>
+</html>
