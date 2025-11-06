@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subnet Mask Generator</title>
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  h1 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    width: 320px;
+    text-align: center;
+  }
+  input, button {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+  }
+  input { width: 80px; text-align: center; }
+  button {
+    background: #eee;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+  button:hover { background: #ddd; }
+  .output {
+    margin-top: 15px;
+    font-family: monospace;
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 6px;
+  }
+  .bit1 { color: #000; }
+  .bit0 { color: #888; }
+</style>
+</head>
+<body>
+
+<h1>Subnet Mask Generator</h1>
+<div class="card">
+  <p>Inserisci il prefisso (es. <strong>24</strong>):</p>
+  <input type="number" id="prefix" min="0" max="32" placeholder="0–32">
+  <button onclick="calcolaMask()">Genera</button>
+  <div class="output" id="output"></div>
+</div>
+
+<script>
+function calcolaMask() {
+  const prefix = +document.getElementById('prefix').value;
+  const out = document.getElementById('output');
+
+  if (prefix < 0 || prefix > 32 || isNaN(prefix)) {
+    out.textContent = "Inserisci un valore tra 0 e 32.";
+    return;
+  }
+
+  const suffix = 32 - prefix;                // Calcolo del suffix
+  const full = Math.floor(prefix / 8);
+  const rem = prefix % 8;
+
+  const octets = Array.from({length: 4}, (_, i) =>
+    i < full ? "11111111" :
+    i === full ? "1".repeat(rem) + "0".repeat(8 - rem) :
+    "00000000"
+  );
+
+  const maskHTML = octets.map(o =>
+    o.replace(/./g, b => `<span class="bit${b}">${b}</span>`)
+  ).join(' . ');
+
+  const decimalMask = octets.map(o => parseInt(o, 2)).join('.');
+
+  const numHost = prefix === 32 ? 1 : Math.pow(2, suffix) - 2;
+
+  out.innerHTML = `
+    <strong>Prefix:</strong> /${prefix}<br>
+    <strong>Suffix:</strong> ${suffix}<br>
+    <strong>Subnet mask:</strong><br>${maskHTML}<br>${decimalMask}<br><br>
+    <strong>Numero host:</strong> 2<sup>${suffix}</sup> - 2 = ${numHost.toLocaleString()}
+  `;
+}
+</script>
+
+</body>
+</html>
