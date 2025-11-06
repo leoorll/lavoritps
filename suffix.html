@@ -57,7 +57,7 @@
 
 <h1>Subnet Mask Generator</h1>
 <div class="card">
-  <p>Inserisci il prefisso (es. <strong>24</strong>):</p>
+  <p>Inserisci il prefisso:</p>
   <input type="number" id="prefix" min="0" max="32" placeholder="0–32">
   <button onclick="calcolaMask()">Genera</button>
   <div class="output" id="output"></div>
@@ -73,7 +73,7 @@ function calcolaMask() {
     return;
   }
 
-  const suffix = 32 - prefix;                // Calcolo del suffix
+  const suffix = 32 - prefix;
   const full = Math.floor(prefix / 8);
   const rem = prefix % 8;
 
