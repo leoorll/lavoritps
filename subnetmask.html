@@ -6,47 +6,51 @@
 <title>Subnet Mask Generator</title>
 <style>
   body {
-    font-family: sans-serif;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    color: #fff;
+    font-family: system-ui, sans-serif;
+    background: #f5f5f5;
+    color: #222;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     margin: 0;
-    text-align: center;
+  }
+  h1 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
   }
   .card {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
+    background: #fff;
+    border: 1px solid #ddd;
     padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     width: 300px;
+    text-align: center;
   }
   input, button {
-    padding: 8px;
-    border: none;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 15px;
   }
+  input { width: 80px; text-align: center; }
   button {
-    background: #00c6ff;
-    color: #fff;
+    background: #eee;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 8px;
   }
-  button:hover { background: #0099cc; }
+  button:hover { background: #ddd; }
   .output {
     margin-top: 15px;
     font-family: monospace;
-    background: rgba(0,0,0,0.3);
-    padding: 8px;
-    border-radius: 8px;
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 6px;
   }
-  .bit1 { color: #00ff99; }
-  .bit0 { color: #ff5555; }
+  .bit1 { color: #000; }
+  .bit0 { color: #888; }
 </style>
 </head>
 <body>
@@ -64,7 +68,7 @@ function calcolaMask() {
   const prefix = +document.getElementById('prefix').value;
   const out = document.getElementById('output');
   if (prefix < 0 || prefix > 32 || isNaN(prefix)) {
-    out.innerHTML = "❌ Inserisci un valore tra 0 e 32.";
+    out.textContent = "Inserisci un valore tra 0 e 32.";
     return;
   }
 
