@@ -14,12 +14,7 @@
       align-items: flex-start;
     }
 
-    h1 {
-      font-size: 20px;
-      margin-bottom: 15px;
-    }
-
-    form {
+    form, #contenitore {
       width: 100%;
       max-width: 350px;
       padding: 15px;
@@ -45,7 +40,7 @@
     }
 
     button {
-      background-color: #007BFF;
+      background-color: #dc3545;
       color: white;
       border: none;
       padding: 8px;
@@ -59,16 +54,6 @@
       background-color: #0056b3;
     }
 
-    #contenitore {
-      width: 100%;
-      max-width: 350px;
-      padding: 15px;
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-      margin-left: 30px;
-    }
-
     .result {
       margin-top: 15px;
       font-size: 14px;
@@ -78,11 +63,6 @@
       margin-top: 15px;
       font-size: 16px;
     }
-
-    p {
-      margin: 4px 0;
-    }
-
   </style>
 </head>
 <body>
@@ -106,7 +86,7 @@
     <input type="text" id="cap" required>
 
     <label for="dataNascita">Data di Nascita:</label>
-    <input type="date" id="dataNascita" required>
+    <input type="text" id="dataNascita" required pattern="^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/[0-9]{4}$" placeholder="">
 
     <button type="submit">Mostra dati</button>
   </form>
@@ -135,8 +115,8 @@
     const outGenerazione = document.getElementById('outGenerazione');
 
     const generazioni = [
-      { nome: 'Generazione Silenziosa', inizio: 1928, fine: 1945 },
       { nome: 'Greatest Generation', inizio: 1901, fine: 1927 },
+      { nome: 'Generazione Silenziosa', inizio: 1928, fine: 1945 },
       { nome: 'Baby Boomers', inizio: 1946, fine: 1964 },
       { nome: 'Generazione X', inizio: 1965, fine: 1980 },
       { nome: 'Millennials', inizio: 1981, fine: 1996 },
@@ -152,18 +132,33 @@
       const indirizzo = document.getElementById('indirizzo').value;
       const citta = document.getElementById('citta').value;
       const cap = document.getElementById('cap').value;
-      const dataNascita = new Date(document.getElementById('dataNascita').value);
+      const dataStr = document.getElementById('dataNascita').value;
 
-      const annoNascita = new Date().getFullYear() - eta;
-      const generazione = generazioni.find(g => annoNascita >= g.inizio && annoNascita <= g.fine);
+      const parts = dataStr.split('/');
+      if (parts.length !== 3) {
+        alert("Inserisci la data nel formato corretto (gg/mm/aaaa)");
+        return;
+      }
 
-      // Aggiornamento dei risultati
+      const giorno = parseInt(parts[0]);
+      const mese = parseInt(parts[1]) - 1;
+      const anno = parseInt(parts[2]);
+
+      const dataNascita = new Date(anno, mese, giorno);
+
+      if (isNaN(dataNascita.getTime())) {
+        alert("Data non valida!");
+        return;
+      }
+
+      const generazione = generazioni.find(g => anno >= g.inizio && anno <= g.fine);
+
       outNome.textContent = nome;
       outCognome.textContent = cognome;
       outIndirizzo.textContent = indirizzo;
       outCitta.textContent = citta;
       outCap.textContent = cap;
-      outDataNascita.textContent = dataNascita.toLocaleDateString();
+      outDataNascita.textContent = dataStr;
       outGenerazione.textContent = generazione ? generazione.nome : 'N/D';
 
       form.reset();
