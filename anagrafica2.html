@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inserimento Anagrafica Utente</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 15px;
+      margin: 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+    }
 
+    form, #contenitore {
+      width: 100%;
+      max-width: 400px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-size: 14px;
+      margin-top: 8px;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+      width: auto;
+      margin: 0 6px 0 0;
+      vertical-align: middle;
+      transform: translateY(1px);
+    }
+
+    .inline-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .checkbox-group, .sport-group {
+      margin-bottom: 12px;
+    }
+
+    button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #b02a37;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="formDati">
+    <h2>Inserisci i tuoi dati</h2>
+
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" required>
+
+    <label for="cognome">Cognome:</label>
+    <input type="text" id="cognome" required>
+
+    <label for="indirizzo">Indirizzo:</label>
+    <input type="text" id="indirizzo" required>
+
+    <label for="citta">Città:</label>
+    <input type="text" id="citta" required>
+
+    <label for="cap">CAP:</label>
+    <input type="text" id="cap" required>
+
+    <label>Sesso:</label>
+    <div class="inline-group">
+      <label><input type="radio" name="sesso" value="Maschio" required> Maschio</label>
+      <label><input type="radio" name="sesso" value="Femmina"> Femmina</label>
+      <label><input type="radio" name="sesso" value="Altro"> Preferisco non specificare</label>
+    </div>
+
+    <label>Veicoli posseduti:</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="veicoli" value="Auto"> Auto</label><br>
+      <label><input type="checkbox" name="veicoli" value="Moto"> Moto</label><br>
+      <label><input type="checkbox" name="veicoli" value="Bicicletta"> Bicicletta</label><br>
+      <label><input type="checkbox" name="veicoli" value="Monopattino"> Altro</label>
+    </div>
+
+    <label for="provincia">Provincia:</label>
+    <select id="provincia" required>
+      <option value="">Seleziona</option>
+      <option value="AL">Alessandria</option>
+      <option value="AT">Asti</option>
+      <option value="AV">Avellino</option>
+      <option value="BA">Bari</option>
+      <option value="BG">Bergamo</option>
+      <option value="BN">Benevento</option>
+      <option value="BR">Brindisi</option>
+      <option value="BS">Brescia</option>
+      <option value="CA">Cagliari</option>
+      <option value="CE">Caserta</option>
+      <option value="CN">Cuneo</option>
+      <option value="CT">Catania</option>
+      <option value="FE">Ferrara</option>
+      <option value="FG">Foggia</option>
+      <option value="FI">Firenze</option>
+      <option value="FR">Frosinone</option>
+      <option value="LE">Lecce</option>
+      <option value="LI">Livorno</option>
+      <option value="LT">Latina</option>
+      <option value="LU">Lucca</option>
+      <option value="ME">Messina</option>
+      <option value="MI">Milano</option>
+      <option value="MN">Mantova</option>
+      <option value="MO">Modena</option>
+      <option value="NA">Napoli</option>
+      <option value="NO">Novara</option>
+      <option value="NU">Nuoro</option>
+      <option value="OR">Oristano</option>
+      <option value="PA">Palermo</option>
+      <option value="PD">Padova</option>
+      <option value="PI">Pisa</option>
+      <option value="PR">Parma</option>
+      <option value="RE">Reggio Emilia</option>
+      <option value="RI">Rieti</option>
+      <option value="RM">Roma</option>
+      <option value="SA">Salerno</option>
+      <option value="SI">Siena</option>
+      <option value="SR">Siracusa</option>
+      <option value="SS">Sassari</option>
+      <option value="SU">Sud Sardegna</option>
+      <option value="TA">Taranto</option>
+      <option value="TP">Trapani</option>
+      <option value="TO">Torino</option>
+      <option value="TV">Treviso</option>
+      <option value="VA">Varese</option>
+      <option value="VE">Venezia</option>
+      <option value="VI">Vicenza</option>
+      <option value="VT">Viterbo</option>
+      <option value="VR">Verona</option>
+    </select>
+
+    <label>Sport praticati:</label>
+    <div class="sport-group">
+      <label><input type="checkbox" name="sport" value="Calcio"> Calcio</label><br>
+      <label><input type="checkbox" name="sport" value="Basket"> Basket</label><br>
+      <label><input type="checkbox" name="sport" value="Pallavolo"> Pallavolo</label><br>
+      <label><input type="checkbox" name="sport" value="Biliardo"> Altro</label>
+    </div>
+
+    <label for="dataNascita">Data di Nascita:</label>
+    <input type="text" id="dataNascita" required 
+           pattern="^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/[0-9]{4}$"
+           placeholder="gg/mm/aaaa">
+
+    <button type="submit">Mostra dati</button>
+  </form>
+
+  <div id="contenitore">
+    <h2>Dati inseriti:</h2>
+    <div id="result" class="result">
+      <p><strong>Nome:</strong> <span id="outNome">-</span></p>
+      <p><strong>Cognome:</strong> <span id="outCognome">-</span></p>
+      <p><strong>Indirizzo:</strong> <span id="outIndirizzo">-</span></p>
+      <p><strong>Città:</strong> <span id="outCitta">-</span></p>
+      <p><strong>CAP:</strong> <span id="outCap">-</span></p>
+      <p><strong>Sesso:</strong> <span id="outSesso">-</span></p>
+      <p><strong>Veicoli posseduti:</strong> <span id="outVeicoli">-</span></p>
+      <p><strong>Provincia:</strong> <span id="outProvincia">-</span></p>
+      <p><strong>Sport praticati:</strong> <span id="outSport">-</span></p>
+      <p><strong>Data di Nascita:</strong> <span id="outDataNascita">-</span></p>
+      <h3>Generazione: <span id="outGenerazione">-</span></h3>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('formDati');
+
+    const output = {
+      nome: document.getElementById('outNome'),
+      cognome: document.getElementById('outCognome'),
+      indirizzo: document.getElementById('outIndirizzo'),
+      citta: document.getElementById('outCitta'),
+      cap: document.getElementById('outCap'),
+      sesso: document.getElementById('outSesso'),
+      veicoli: document.getElementById('outVeicoli'),
+      provincia: document.getElementById('outProvincia'),
+      sport: document.getElementById('outSport'),
+      data: document.getElementById('outDataNascita'),
+      generazione: document.getElementById('outGenerazione')
+    };
+
+    const generazioni = [
+      { nome: 'Greatest Generation', inizio: 1901, fine: 1927 },
+      { nome: 'Generazione Silenziosa', inizio: 1928, fine: 1945 },
+      { nome: 'Baby Boomers', inizio: 1946, fine: 1964 },
+      { nome: 'Generazione X', inizio: 1965, fine: 1980 },
+      { nome: 'Millennials', inizio: 1981, fine: 1996 },
+      { nome: 'Generazione Z', inizio: 1997, fine: 2012 },
+      { nome: 'Generazione Alpha', inizio: 2013, fine: new Date().getFullYear() },
+    ];
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById('nome').value;
+      const cognome = document.getElementById('cognome').value;
+      const indirizzo = document.getElementById('indirizzo').value;
+      const citta = document.getElementById('citta').value;
+      const cap = document.getElementById('cap').value;
+
+      const sesso = document.querySelector('input[name="sesso"]:checked')?.value || "-";
+      const veicoli = [...document.querySelectorAll('input[name="veicoli"]:checked')]
+                      .map(v => v.value).join(', ') || "-";
+      const provincia = document.getElementById('provincia').value || "-";
+      const sport = [...document.querySelectorAll('input[name="sport"]:checked')]
+                    .map(s => s.value).join(', ') || "-";
+      const dataStr = document.getElementById('dataNascita').value;
+
+      const parts = dataStr.split('/');
+      const giorno = parseInt(parts[0]);
+      const mese = parseInt(parts[1]) - 1;
+      const anno = parseInt(parts[2]);
+
+      const generazione = generazioni.find(g => anno >= g.inizio && anno <= g.fine);
+
+      output.nome.textContent = nome;
+      output.cognome.textContent = cognome;
+      output.indirizzo.textContent = indirizzo;
+      output.citta.textContent = citta;
+      output.cap.textContent = cap;
+      output.sesso.textContent = sesso;
+      output.veicoli.textContent = veicoli;
+      output.provincia.textContent = provincia;
+      output.sport.textContent = sport;
+      output.data.textContent = dataStr;
+      output.generazione.textContent = generazione ? generazione.nome : "N/D";
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
