@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calcolatrice </title>
+<title>Calcolatrice</title>
 <style>
     body {
         font-family: system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -91,34 +91,34 @@
     <h1>Calcolatrice</h1>
     <input id="display" type="text" readonly>
     <div class="buttons">
-        <button class="number" onclick="aggiungiNumero(7)">7</button>
-        <button class="number" onclick="aggiungiNumero(8)">8</button>
-        <button class="number" onclick="aggiungiNumero(9)">9</button>
+        <button class="number" onclick="aggiungiNumero('7')">7</button>
+        <button class="number" onclick="aggiungiNumero('8')">8</button>
+        <button class="number" onclick="aggiungiNumero('9')">9</button>
         <button class="operator" onclick="aggiungiOperatore('/')">÷</button>
 
-        <button class="number" onclick="aggiungiNumero(4)">4</button>
-        <button class="number" onclick="aggiungiNumero(5)">5</button>
-        <button class="number" onclick="aggiungiNumero(6)">6</button>
+        <button class="number" onclick="aggiungiNumero('4')">4</button>
+        <button class="number" onclick="aggiungiNumero('5')">5</button>
+        <button class="number" onclick="aggiungiNumero('6')">6</button>
         <button class="operator" onclick="aggiungiOperatore('*')">×</button>
 
-        <button class="number" onclick="aggiungiNumero(1)">1</button>
-        <button class="number" onclick="aggiungiNumero(2)">2</button>
-        <button class="number" onclick="aggiungiNumero(3)">3</button>
+        <button class="number" onclick="aggiungiNumero('1')">1</button>
+        <button class="number" onclick="aggiungiNumero('2')">2</button>
+        <button class="number" onclick="aggiungiNumero('3')">3</button>
         <button class="operator" onclick="aggiungiOperatore('-')">−</button>
 
-        <button class="function" onclick="aggiungiOperatore('.')">.</button>
-        <button class="number" onclick="aggiungiNumero(0)">0</button>
+        <button class="function" onclick="aggiungiNumero('.')">.</button>
+        <button class="number" onclick="aggiungiNumero('0')">0</button>
         <button class="function" onclick="reset()">C</button>
         <button class="operator" onclick="aggiungiOperatore('+')">+</button>
 
         <button class="function" onclick="aggiungiOperatore('^')">xʸ</button>
         <button class="function" onclick="aggiungiOperatore('√')">√x</button>
         <button class="function" onclick="aggiungiOperatore('%')">%</button>
-         <button class="operator" onclick="calcola()">=</button>
+        <button class="operator" onclick="calcola()">=</button>
 
         <button class="function" onclick="aggiungiOperatore('tan')">tan</button>
         <button class="function" onclick="aggiungiOperatore('sin')">sin</button>
-   		<button class="function" onclick="aggiungiOperatore('cos')">cos</button>
+        <button class="function" onclick="aggiungiOperatore('cos')">cos</button>
     </div>
     <div class="result" id="result">Risultato:</div>
 </div>
@@ -127,18 +127,30 @@
 class Calcolatrice {
     constructor() {
         this.memoria = [];
+        this.numeroCorrente = '';
     }
 
     aggiungiNumero(valore) {
-        this.memoria.push(parseFloat(valore));
+        this.numeroCorrente += valore;
     }
 
     aggiungiOperatore(operatore) {
+        if (this.numeroCorrente !== '') {
+            this.memoria.push(parseFloat(this.numeroCorrente));
+            this.numeroCorrente = '';
+        }
         this.memoria.push(operatore);
     }
 
     calcola() {
+        if (this.numeroCorrente !== '') {
+            this.memoria.push(parseFloat(this.numeroCorrente));
+            this.numeroCorrente = '';
+        }
+
+        if (this.memoria.length === 0) return 0;
         let risultato = this.memoria[0];
+
         for (let i = 1; i < this.memoria.length; i += 2) {
             const operatore = this.memoria[i];
             const numero = this.memoria[i + 1];
@@ -162,6 +174,7 @@ class Calcolatrice {
 
     reset() {
         this.memoria = [];
+        this.numeroCorrente = '';
     }
 }
 
@@ -192,7 +205,7 @@ function reset() {
 
 function aggiornaDisplay() {
     let display = document.getElementById('display');
-    display.value = calc.memoria.join(' ');
+    display.value = [...calc.memoria.map(x => x.toString()), calc.numeroCorrente].join(' ');
 }
 </script>
 </body>
