@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calcolatrice iPhone Style</title>
+<style>
+    body {
+        font-family: system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        background-color: #f0f0f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        background-color: #ffffff;
+        border-radius: 30px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        width: 360px;
+        max-width: 90%;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    #display {
+        width: 100%;
+        padding: 20px;
+        font-size: 28px;
+        border-radius: 15px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        text-align: right;
+        box-sizing: border-box;
+        background-color: #f9f9f9;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+
+    .buttons button {
+        padding: 20px;
+        font-size: 20px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .buttons button.number {
+        background-color: #e0e0e0;
+    }
+
+    .buttons button.operator {
+        background-color: #ff9500;
+        color: white;
+    }
+
+    .buttons button.function {
+        background-color: #a6a6a6;
+        color: white;
+    }
+
+    .buttons button:hover {
+        opacity: 0.9;
+    }
+
+    .result {
+        margin-top: 20px;
+        font-size: 22px;
+        font-weight: bold;
+        padding: 10px;
+        background-color: #d0f0fd;
+        border-radius: 15px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Calcolatrice</h1>
+    <input id="display" type="text" readonly>
+    <div class="buttons">
+        <button class="number" onclick="aggiungiNumero(7)">7</button>
+        <button class="number" onclick="aggiungiNumero(8)">8</button>
+        <button class="number" onclick="aggiungiNumero(9)">9</button>
+        <button class="operator" onclick="aggiungiOperatore('/')">÷</button>
+
+        <button class="number" onclick="aggiungiNumero(4)">4</button>
+        <button class="number" onclick="aggiungiNumero(5)">5</button>
+        <button class="number" onclick="aggiungiNumero(6)">6</button>
+        <button class="operator" onclick="aggiungiOperatore('*')">×</button>
+
+        <button class="number" onclick="aggiungiNumero(1)">1</button>
+        <button class="number" onclick="aggiungiNumero(2)">2</button>
+        <button class="number" onclick="aggiungiNumero(3)">3</button>
+        <button class="operator" onclick="aggiungiOperatore('-')">−</button>
+
+        <button class="function" onclick="aggiungiOperatore('.')">.</button>
+        <button class="number" onclick="aggiungiNumero(0)">0</button>
+        <button class="function" onclick="reset()">C</button>
+        <button class="operator" onclick="aggiungiOperatore('+')">+</button>
+
+        <button class="function" onclick="aggiungiOperatore('^')">xʸ</button>
+        <button class="function" onclick="aggiungiOperatore('√')">√x</button>
+        <button class="function" onclick="aggiungiOperatore('%')">%</button>
+         <button class="operator" onclick="calcola()">=</button>
+
+        <button class="function" onclick="aggiungiOperatore('tan')">tan</button>
+        <button class="function" onclick="aggiungiOperatore('sin')">sin</button>
+   		<button class="function" onclick="aggiungiOperatore('cos')">cos</button>
+    </div>
+    <div class="result" id="result">Risultato:</div>
+</div>
+
+<script>
+class Calcolatrice {
+    constructor() {
+        this.memoria = [];
+    }
+
+    aggiungiNumero(valore) {
+        this.memoria.push(parseFloat(valore));
+    }
+
+    aggiungiOperatore(operatore) {
+        this.memoria.push(operatore);
+    }
+
+    calcola() {
+        let risultato = this.memoria[0];
+        for (let i = 1; i < this.memoria.length; i += 2) {
+            const operatore = this.memoria[i];
+            const numero = this.memoria[i + 1];
+
+            if (operatore === '+') risultato += numero;
+            if (operatore === '-') risultato -= numero;
+            if (operatore === '*') risultato *= numero;
+            if (operatore === '/') {
+                if (numero !== 0) risultato /= numero;
+                else return 'Errore';
+            }
+            if (operatore === '^') risultato = Math.pow(risultato, numero);
+            if (operatore === '√') risultato = Math.sqrt(risultato);
+            if (operatore === '%') risultato = risultato * (numero / 100);
+            if (operatore === 'sin') risultato = Math.sin(risultato);
+            if (operatore === 'cos') risultato = Math.cos(risultato);
+            if (operatore === 'tan') risultato = Math.tan(risultato);
+        }
+        return risultato;
+    }
+
+    reset() {
+        this.memoria = [];
+    }
+}
+
+let calc = new Calcolatrice();
+
+function aggiungiNumero(numero) {
+    calc.aggiungiNumero(numero);
+    aggiornaDisplay();
+}
+
+function aggiungiOperatore(operatore) {
+    calc.aggiungiOperatore(operatore);
+    aggiornaDisplay();
+}
+
+function calcola() {
+    let risultato = calc.calcola();
+    document.getElementById('result').innerText = "Risultato: " + risultato;
+    calc.reset();
+    aggiornaDisplay();
+}
+
+function reset() {
+    calc.reset();
+    aggiornaDisplay();
+    document.getElementById('result').innerText = "Risultato:";
+}
+
+function aggiornaDisplay() {
+    let display = document.getElementById('display');
+    display.value = calc.memoria.join(' ');
+}
+</script>
+</body>
+</html>
