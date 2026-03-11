@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Import CSV</title>
+
+<style>
+
+.container{
+display:flex;
+flex-wrap:wrap;
+}
+
+.blocco{
+border:1px solid black;
+padding:10px;
+margin:10px;
+width:200px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Importa file CSV</h2>
+
+<input type="file" id="file">
+
+<div class="container" id="out"></div>
+
+<script>
+
+let dati = []
+
+file.addEventListener("change", function(){
+
+let f = file.files[0]
+
+let reader = new FileReader()
+
+reader.onload = function(e){
+
+let testo = e.target.result
+
+let righe = testo.split("\n")
+
+for(let i=1;i<righe.length;i++){
+
+let campi = righe[i].split(",")
+
+if(campi.length >=3){
+
+dati.push({
+nome: campi[0],
+cognome: campi[1],
+email: campi[2]
+})
+
+}
+
+}
+
+creaBlocchi(0)
+
+}
+
+reader.readAsText(f)
+
+})
+
+function creaBlocchi(i){
+
+if(i >= dati.length){
+return
+}
+
+out.innerHTML += 
+"<div class='blocco'>" +
+"<b>Nome:</b> " + dati[i].nome + "<br>" +
+"<b>Cognome:</b> " + dati[i].cognome + "<br>" +
+"<b>Email:</b> " + dati[i].email +
+"</div>"
+
+creaBlocchi(i+1)
+
+}
+
+</script>
+
+</body>
+</html>
