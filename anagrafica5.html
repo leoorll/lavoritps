@@ -1,1 +1,81 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Verifica JS</title>
+</head>
 
+<body>
+
+Nome: <input type="text" id="n1"><br><br>
+Cognome: <input type="text" id="n2"><br><br>
+CAP: <input type="text" id="n3"><br><br>
+Email: <input type="text" id="n4"><br><br>
+
+<button onclick="salva()">Salva</button>
+
+<table border="1">
+<tr>
+<th>Nome</th>
+<th>Cognome</th>
+<th>CAP</th>
+<th>Email</th>
+</tr>
+<tbody id="out"></tbody>
+</table>
+
+<script>
+
+let nomi = []
+
+function salva(){
+
+let nome = n1.value
+let cognome = n2.value
+let cap = n3.value
+let email = n4.value
+
+let rNome = /^[a-zA-Z]+$/
+let rCognome = /^[a-zA-Z]+$/
+let rCap = /^[0-9]+$/
+let rEmail = /@.*\./
+
+if(!rNome.test(nome)){
+alert("Nome sbagliato")
+return
+}
+
+if(!rCognome.test(cognome)){
+alert("Cognome sbagliato")
+return
+}
+
+if(!rCap.test(cap)){
+alert("CAP deve avere solo numeri")
+return
+}
+
+if(!rEmail.test(email)){
+alert("Email non valida")
+return
+}
+
+nomi = []
+
+nomi.push({nome:nome, cognome:cognome, cap:cap, email:email})
+
+out.innerHTML = ""
+
+for(let i=0;i<nomi.length;i++){
+
+out.innerHTML += "<tr><td>" + nomi[i].nome + "</td><td>" + nomi[i].cognome + "</td><td>" + nomi[i].cap + "</td><td>" + nomi[i].email + "</td></tr>"
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
+```
