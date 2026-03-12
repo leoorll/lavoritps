@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Stampa Anagrafica</title>
+<link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+
+<h1>ELENCO PERSONE</h1>
+
+<table border="1">
+
+<tr>
+<th>Nome</th>
+<th>Cognome</th>
+<th>Anno nascita</th>
+<th>Regione</th>
+<th>CAP</th>
+<th>Email</th>
+<th>Genere</th>
+<th>Mezzi posseduti</th>
+<th>Sport</th>
+</tr>
+
+</table>
+
+<script>
+
+let tab = document.getElementsByTagName("table")[0];
+let elenco = JSON.parse(localStorage.getItem("elenco"));
+
+if(elenco != null){
+    stampaRicorsiva(0);
+}
+
+function stampaRicorsiva(indice){
+
+    if(indice >= elenco.length){
+        return;
+    }
+
+    let tr = document.createElement("tr");
+
+    tr.innerHTML = `
+        <td>${elenco[indice].nome}</td>
+        <td>${elenco[indice].cognome}</td>
+        <td>${elenco[indice].nascita}</td>
+        <td>${elenco[indice].regione}</td>
+        <td>${elenco[indice].cap}</td>
+        <td>${elenco[indice].email}</td>
+        <td>${elenco[indice].genere}</td>
+        <td>${elenco[indice].mezzi.join(", ")}</td>
+        <td>${elenco[indice].sport.join(", ")}</td>
+    `;
+
+    tab.appendChild(tr);
+
+    stampaRicorsiva(indice + 1);
+}
+
+</script>
+
+</body>
+</html>
