@@ -1,66 +1,80 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Stampa Anagrafica</title>
-<link rel="stylesheet" href="style2.css">
-</head>
-
-<body>
-
-<h1>ELENCO PERSONE</h1>
-
-<table border="1">
-
-<tr>
-<th>Nome</th>
-<th>Cognome</th>
-<th>Anno nascita</th>
-<th>Regione</th>
-<th>CAP</th>
-<th>Email</th>
-<th>Genere</th>
-<th>Mezzi posseduti</th>
-<th>Sport</th>
-</tr>
-
-</table>
-
-<script>
-
-let tab = document.getElementsByTagName("table")[0];
-let elenco = JSON.parse(localStorage.getItem("elenco"));
-
-if(elenco != null){
-    stampaRicorsiva(0);
-}
-
-function stampaRicorsiva(indice){
-
-    if(indice >= elenco.length){
-        return;
+  <style>
+    body {
+      font-family: Georgia, sans-serif;
+      background-color: #4d0da1;
+      display: flex;
+      justify-content: center;
+      margin-top: 70px;
+      color: black;
     }
 
-    let tr = document.createElement("tr");
+    table {
+      background-color: #bb8df7;
+      border-collapse: collapse;
+      width: 900px;
+      text-align: center;
+      border-radius: 20px;
+      overflow: hidden;
+    }
 
-    tr.innerHTML = `
-        <td>${elenco[indice].nome}</td>
-        <td>${elenco[indice].cognome}</td>
-        <td>${elenco[indice].nascita}</td>
-        <td>${elenco[indice].regione}</td>
-        <td>${elenco[indice].cap}</td>
-        <td>${elenco[indice].email}</td>
-        <td>${elenco[indice].genere}</td>
-        <td>${elenco[indice].mezzi.join(", ")}</td>
-        <td>${elenco[indice].sport.join(", ")}</td>
-    `;
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+    }
 
-    tab.appendChild(tr);
+    th {
+      background-color: #5d2b9e;
+      color: white;
+    }
+  </style>
 
-    stampaRicorsiva(indice + 1);
-}
+  <script>
+    function mostra() {
 
-</script>
+      var elenco = localStorage.getItem("elenco");
+
+      if (elenco == null) {
+        document.getElementById("tabella").innerHTML = "Nessun dato presente";
+        return;
+      }
+
+      elenco = JSON.parse(elenco);
+
+      var testo = "<table>";
+      testo += "<tr>";
+      testo += "<th>Nome</th>";
+      testo += "<th>Cognome</th>";
+      testo += "<th>Età</th>";
+      testo += "<th>Città</th>";
+      testo += "<th>CAP</th>";
+      testo += "<th>Email</th>";
+      testo += "</tr>";
+
+      for (var i = 0; i < elenco.length; i++) {
+
+        testo += "<tr>";
+        testo += "<td>" + elenco[i].nome + "</td>";
+        testo += "<td>" + elenco[i].cognome + "</td>";
+        testo += "<td>" + elenco[i].eta + "</td>";
+        testo += "<td>" + elenco[i].citta + "</td>";
+        testo += "<td>" + elenco[i].cap + "</td>";
+        testo += "<td>" + elenco[i].email + "</td>";
+        testo += "</tr>";
+      }
+
+      testo += "</table>";
+
+      document.getElementById("tabella").innerHTML = testo;
+    }
+  </script>
+</head>
+
+<body onload="mostra()">
+
+  <div id="tabella"></div>
 
 </body>
 </html>
