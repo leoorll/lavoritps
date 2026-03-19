@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Georgia, sans-serif;
+      background-color: #4d0da1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 70px;
+      color: black;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      width: 80%;
+    }
+
+    .persona {
+      background-color: #bb8df7;
+      padding: 20px;
+      border-radius: 20px;
+      width: 200px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    input[type="file"] {
+      margin-bottom: 20px;
+    }
+  </style>
+  
+  <script>
+    function caricaFile(event) {
+
+      var file = event.target.files[0];
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var testo = e.target.result;
+        var righe = testo.split("\n");
+        mostraPersone(righe, 1);
+      };
+      reader.readAsText(file);
+    }
+    
+    function mostraPersone(righe, i) {
+
+      if (i >= righe.length) {
+        return;
+      }
+
+      var dati = righe[i].split(",");
+      var nome = dati[0];
+      var cognome = dati[1];
+      var eta = dati[2];
+      var citta = dati[3];
+      
+      var blocco = document.createElement("div");
+
+      blocco.className = "persona";
+
+      blocco.innerHTML =
+        "<b>Nome:</b> " + nome + "<br>" +
+        "<b>Cognome:</b> " + cognome + "<br>" +
+        "<b>Età:</b> " + eta + "<br>" +
+        "<b>Città:</b> " + citta;
+
+      document.getElementById("output").appendChild(blocco);
+      mostraPersone(righe, i + 1);
+    }
+
+  </script>
+</head>
+
+<body>
+
+  <h2>Importa file CSV</h2>
+  <input type="file" onchange="caricaFile(event)">
+  <div class="container" id="output"></div>
+
+</body>
+</html>
