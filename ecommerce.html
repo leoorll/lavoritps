@@ -6,33 +6,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>E-Commerce ES1999</title>
+    <title>InterFans</title>
 
     <style>
 
         body{
             margin:0;
             font-family:Arial;
-            background-color:#f0f0f0;
+            background-color:#e9eef5;
         }
 
         header{
-            background-color:#222;
+            background:linear-gradient(to right,#000000,#0047ab);
             color:white;
-            text-align:center;
             padding:20px;
         }
 
+        .topbar{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+
+        .logo{
+            font-size:32px;
+            font-weight:bold;
+        }
+
         nav{
-            margin-top:10px;
+            display:flex;
+            gap:10px;
         }
 
         nav button{
-            padding:10px;
-            margin:5px;
+            padding:10px 15px;
             border:none;
             border-radius:5px;
             cursor:pointer;
+            background-color:white;
+            color:#0047ab;
+            font-weight:bold;
+        }
+
+        nav button:hover{
+            background-color:#dbe7ff;
         }
 
         #prodotti{
@@ -45,7 +63,7 @@
 
         .card{
             background-color:white;
-            width:250px;
+            width:260px;
             border-radius:10px;
             overflow:hidden;
             text-align:center;
@@ -54,12 +72,13 @@
 
         .card img{
             width:100%;
-            height:200px;
+            height:220px;
             object-fit:cover;
         }
 
         .card h3{
             margin:10px;
+            color:#0047ab;
         }
 
         .card p{
@@ -69,11 +88,15 @@
         .card button{
             margin-bottom:15px;
             padding:10px;
-            background-color:green;
+            background-color:#0047ab;
             color:white;
             border:none;
             border-radius:5px;
             cursor:pointer;
+        }
+
+        .card button:hover{
+            background-color:#002f73;
         }
 
         #dettagli{
@@ -112,12 +135,38 @@
             text-align:center;
         }
 
+        #contatti{
+            display:none;
+            max-width:700px;
+            margin:auto;
+            background-color:white;
+            padding:20px;
+            border-radius:10px;
+            margin-top:20px;
+        }
+
         textarea{
             width:100%;
             height:200px;
         }
 
+        .contatto-box{
+            background-color:#f5f5f5;
+            padding:15px;
+            border-radius:10px;
+            margin-top:15px;
+        }
+
+        .contatto-box h3{
+            color:#0047ab;
+        }
+
         @media(max-width:600px){
+
+            .topbar{
+                flex-direction:column;
+                gap:15px;
+            }
 
             #prodotti{
                 flex-direction:column;
@@ -138,23 +187,33 @@
 
 <header>
 
-    <h1>Tech Store</h1>
+    <div class="topbar">
 
-    <nav>
+        <div class="logo">
+            InterFans
+        </div>
 
-        <button onclick="mostraHome()">
-            Home
-        </button>
+        <nav>
 
-        <button onclick="mostraCarrello()">
-            Carrello
-        </button>
+            <button onclick="mostraHome()">
+                Home
+            </button>
 
-        <button onclick="mostraConfigurazione()">
-            Configurazione
-        </button>
+            <button onclick="mostraCarrello()">
+                Carrello
+            </button>
 
-    </nav>
+            <button onclick="mostraContatti()">
+                Contattaci
+            </button>
+
+            <button onclick="mostraConfigurazione()">
+                Configurazione
+            </button>
+
+        </nav>
+
+    </div>
 
 </header>
 
@@ -175,9 +234,9 @@
 
 <textarea id="csv">
 
-Logitech,G203,Mouse gaming RGB,https://picsum.photos/300?1,29.99
-Razer,BlackWidow,Tastiera meccanica RGB,https://picsum.photos/300?2,89.99
-HyperX,Cloud II,Cuffie gaming surround,https://picsum.photos/300?3,69.99
+Inter,Lautaro Martinez 10,Maglia ufficiale autografata,https://picsum.photos/300?1,249.99
+Nike,Pallone Champions League,Pallone firmato dai giocatori,https://picsum.photos/300?2,179.99
+Inter,Barella 23,Maglia away autografata,https://picsum.photos/300?3,229.99
 
 </textarea>
 
@@ -186,6 +245,47 @@ HyperX,Cloud II,Cuffie gaming surround,https://picsum.photos/300?3,69.99
     <button onclick="caricaCSV()">
         Carica prodotti
     </button>
+
+</div>
+
+<div id="contatti">
+
+    <h2>Contattaci</h2>
+
+    <p>
+        Hai problemi con un ordine oppure vuoi maggiori informazioni
+        sui prodotti firmati?
+    </p>
+
+    <div class="contatto-box">
+
+        <h3>Email</h3>
+
+        <p>
+            interfansshop@gmail.com
+        </p>
+
+    </div>
+
+    <div class="contatto-box">
+
+        <h3>Telefono</h3>
+
+        <p>
+            +39 02 12345678
+        </p>
+
+    </div>
+
+    <div class="contatto-box">
+
+        <h3>Sede</h3>
+
+        <p>
+            Milano - Zona San Siro
+        </p>
+
+    </div>
 
 </div>
 
@@ -235,6 +335,7 @@ function mostraProdotti(){
     document.getElementById("dettagli").style.display = "none";
     document.getElementById("carrello").style.display = "none";
     document.getElementById("configurazione").style.display = "none";
+    document.getElementById("contatti").style.display = "none";
 
     var contenitore = document.getElementById("prodotti");
 
@@ -315,6 +416,7 @@ function mostraCarrello(){
     document.getElementById("prodotti").style.display = "none";
     document.getElementById("dettagli").style.display = "none";
     document.getElementById("configurazione").style.display = "none";
+    document.getElementById("contatti").style.display = "none";
 
     var divCarrello = document.getElementById("carrello");
 
@@ -364,8 +466,20 @@ function mostraConfigurazione(){
     document.getElementById("prodotti").style.display = "none";
     document.getElementById("dettagli").style.display = "none";
     document.getElementById("carrello").style.display = "none";
+    document.getElementById("contatti").style.display = "none";
 
     document.getElementById("configurazione").style.display = "block";
+
+}
+
+function mostraContatti(){
+
+    document.getElementById("prodotti").style.display = "none";
+    document.getElementById("dettagli").style.display = "none";
+    document.getElementById("carrello").style.display = "none";
+    document.getElementById("configurazione").style.display = "none";
+
+    document.getElementById("contatti").style.display = "block";
 
 }
 
@@ -380,4 +494,5 @@ caricaCSV();
 </script>
 
 </body>
+
 </html>
