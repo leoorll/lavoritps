@@ -3,158 +3,194 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>InterFans</title>
+<title>InterFans</title>
 
-    <style>
+<style>
 
-        body{
-            margin:0;
-            font-family:Arial;
-            background-color:#e9eef5;
-        }
+body{
+    margin:0;
+    font-family:Arial;
+    background-color:#e9eef5;
+}
 
-        header{
-            background:linear-gradient(to right,#000000,#0047ab);
-            color:white;
-            padding:20px;
-        }
+header{
+    background:linear-gradient(to right,#000000,#0047ab);
+    color:white;
+    padding:20px;
+}
 
-        .topbar{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            flex-wrap:wrap;
-        }
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
 
-        .logo{
-            font-size:32px;
-            font-weight:bold;
-        }
+.logo{
+    font-size:32px;
+    font-weight:bold;
+}
 
-        nav{
-            display:flex;
-            gap:10px;
-        }
+nav{
+    display:flex;
+    gap:10px;
+}
 
-        nav button{
-            padding:10px 15px;
-            border:none;
-            border-radius:5px;
-            cursor:pointer;
-            background-color:white;
-            color:#0047ab;
-            font-weight:bold;
-        }
+nav button{
+    padding:10px 15px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    background-color:white;
+    color:#0047ab;
+    font-weight:bold;
+}
 
-        nav button:hover{
-            background-color:#dbe7ff;
-        }
+nav button:hover{
+    background-color:#dbe7ff;
+}
 
-        #home{
-            padding:40px;
-        }
+#home{
+    padding:40px;
+}
 
-        .titolo-home{
-            text-align:center;
-            color:#0047ab;
-            margin-bottom:40px;
-        }
+.titolo-home{
+    text-align:center;
+    color:#0047ab;
+    margin-bottom:40px;
+}
 
-        .categorie{
-            display:flex;
-            justify-content:center;
-            gap:30px;
-            flex-wrap:wrap;
-        }
+.box-home{
+    background-color:white;
+    max-width:700px;
+    margin:auto;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+}
 
-        .categoria{
-            width:280px;
-            height:200px;
-            background-color:white;
-            border-radius:15px;
-            box-shadow:0px 0px 10px rgba(0,0,0,0.2);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            text-align:center;
-            font-size:24px;
-            font-weight:bold;
-            color:#0047ab;
-            cursor:pointer;
-            transition:0.3s;
-        }
+.box-home h2{
+    color:#0047ab;
+}
 
-        .categoria:hover{
-            transform:scale(1.05);
-            background-color:#dbe7ff;
-        }
+select{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:5px;
+    border:1px solid gray;
+}
 
-        #paginaCategoria{
-            display:none;
-            padding:30px;
-        }
+.drag-area{
+    border:3px dashed #0047ab;
+    padding:40px;
+    text-align:center;
+    margin-top:30px;
+    border-radius:10px;
+    background-color:#f7faff;
+}
 
-        .titolo-categoria{
-            text-align:center;
-            color:#0047ab;
-            margin-bottom:30px;
-        }
+.drag-area input{
+    margin-top:15px;
+}
 
-        #contenutoCategoria{
-            display:flex;
-            flex-wrap:wrap;
-            justify-content:center;
-            gap:20px;
-        }
+#paginaCategoria{
+    display:none;
+    padding:30px;
+}
 
-        #carrello{
-            display:none;
-            max-width:700px;
-            margin:auto;
-            background-color:white;
-            padding:20px;
-            border-radius:10px;
-            margin-top:20px;
-        }
+.titolo-categoria{
+    text-align:center;
+    color:#0047ab;
+}
 
-        #contatti{
-            display:none;
-            max-width:700px;
-            margin:auto;
-            background-color:white;
-            padding:20px;
-            border-radius:10px;
-            margin-top:20px;
-        }
+#contenutoCategoria{
+    max-width:900px;
+    margin:auto;
+    margin-top:30px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
 
-        .contatto-box{
-            background-color:#f5f5f5;
-            padding:15px;
-            border-radius:10px;
-            margin-top:15px;
-        }
+.card{
+    background-color:white;
+    width:250px;
+    border-radius:10px;
+    overflow:hidden;
+    text-align:center;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+}
 
-        .contatto-box h3{
-            color:#0047ab;
-        }
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
 
-        @media(max-width:600px){
+.card h3{
+    color:#0047ab;
+}
 
-            .topbar{
-                flex-direction:column;
-                gap:15px;
-            }
+.card button{
+    margin-bottom:15px;
+    padding:10px;
+    border:none;
+    border-radius:5px;
+    background-color:#0047ab;
+    color:white;
+    cursor:pointer;
+}
 
-            .categoria{
-                width:90%;
-            }
+#carrello{
+    display:none;
+    max-width:700px;
+    margin:auto;
+    background-color:white;
+    padding:20px;
+    border-radius:10px;
+    margin-top:20px;
+}
 
-        }
+#contatti{
+    display:none;
+    max-width:700px;
+    margin:auto;
+    background-color:white;
+    padding:20px;
+    border-radius:10px;
+    margin-top:20px;
+}
 
-    </style>
+.contatto-box{
+    background-color:#f5f5f5;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+@media(max-width:600px){
+
+    .topbar{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .box-home{
+        width:90%;
+    }
+
+    .card{
+        width:90%;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -162,29 +198,29 @@
 
 <header>
 
-    <div class="topbar">
+<div class="topbar">
 
-        <div class="logo">
-            InterFans
-        </div>
-
-        <nav>
-
-            <button onclick="mostraHome()">
-                Home
-            </button>
-
-            <button onclick="mostraCarrello()">
-                Carrello
-            </button>
-
-            <button onclick="mostraContatti()">
-                Contattaci
-            </button>
-
-        </nav>
-
+    <div class="logo">
+        InterFans
     </div>
+
+    <nav>
+
+        <button onclick="mostraHome()">
+            Home
+        </button>
+
+        <button onclick="mostraCarrello()">
+            Carrello
+        </button>
+
+        <button onclick="mostraContatti()">
+            Contattaci
+        </button>
+
+    </nav>
+
+</div>
 
 </header>
 
@@ -194,23 +230,47 @@
         Benvenuto su InterFans
     </h1>
 
-    <div class="categorie">
+    <div class="box-home">
 
-        <div class="categoria" onclick="apriCategoria('Maglie Firmate')">
+        <h2>Seleziona categoria CSV</h2>
 
-            Maglie Firmate
+        <select id="categoriaCSV" onchange="cambiaCategoria()">
 
-        </div>
+            <option value="">
+                -- Seleziona categoria --
+            </option>
 
-        <div class="categoria" onclick="apriCategoria('Palloni Firmati')">
+            <option value="Maglie Firmate">
+                Maglie Firmate
+            </option>
 
-            Palloni Firmati
+            <option value="Palloni Firmati">
+                Palloni Firmati
+            </option>
 
-        </div>
+            <option value="Maglie Originali">
+                Maglie Originali
+            </option>
 
-        <div class="categoria" onclick="apriCategoria('Maglie Originali')">
+        </select>
 
-            Maglie Originali
+        <div class="drag-area">
+
+            <h3>
+                Carica il tuo file CSV
+            </h3>
+
+            <p>
+                Trascina il file oppure selezionalo
+            </p>
+
+            <input type="file" id="csvFile" accept=".csv">
+
+            <br><br>
+
+            <button onclick="caricaCSV()">
+                Carica CSV
+            </button>
 
         </div>
 
@@ -233,7 +293,7 @@
     <h2>Contattaci</h2>
 
     <p>
-        Hai bisogno di informazioni sui prodotti oppure sugli ordini?
+        Per informazioni sugli ordini o sui prodotti firmati.
     </p>
 
     <div class="contatto-box">
@@ -272,7 +332,49 @@
 
 var carrello = [];
 
-function apriCategoria(nomeCategoria){
+var categoriaAttiva = "";
+
+function cambiaCategoria(){
+
+    categoriaAttiva =
+    document.getElementById("categoriaCSV").value;
+
+}
+
+function caricaCSV(){
+
+    var file =
+    document.getElementById("csvFile").files[0];
+
+    if(!file){
+
+        alert("Seleziona un file CSV");
+        return;
+
+    }
+
+    if(categoriaAttiva == ""){
+
+        alert("Seleziona una categoria");
+        return;
+
+    }
+
+    var reader = new FileReader();
+
+    reader.onload = function(evento){
+
+        var testo = evento.target.result;
+
+        apriCategoria(categoriaAttiva, testo);
+
+    };
+
+    reader.readAsText(file);
+
+}
+
+function apriCategoria(nomeCategoria, testoCSV){
 
     document.getElementById("home").style.display = "none";
     document.getElementById("carrello").style.display = "none";
@@ -280,17 +382,73 @@ function apriCategoria(nomeCategoria){
 
     document.getElementById("paginaCategoria").style.display = "block";
 
-    document.getElementById("titoloCategoria").innerHTML = nomeCategoria;
+    document.getElementById("titoloCategoria").innerHTML =
+    nomeCategoria;
 
-    document.getElementById("contenutoCategoria").innerHTML =
+    var contenitore =
+    document.getElementById("contenutoCategoria");
 
-    '<h3>' +
-    'Pagina dedicata a: ' + nomeCategoria +
-    '</h3>' +
+    contenitore.innerHTML = "";
 
-    '<p>' +
-    'Qui verranno mostrati i prodotti della categoria.' +
-    '</p>';
+    var righe = testoCSV.split("\n");
+
+    for(var i = 0; i < righe.length; i++){
+
+        var colonne = righe[i].split(",");
+
+        if(colonne.length >= 5){
+
+            contenitore.innerHTML +=
+
+            '<div class="card">' +
+
+                '<img src="' + colonne[3] + '">' +
+
+                '<h3>' +
+                    colonne[0] +
+                    ' ' +
+                    colonne[1] +
+                '</h3>' +
+
+                '<p>' +
+                    colonne[2] +
+                '</p>' +
+
+                '<h3>' +
+                    colonne[4] +
+                    ' €' +
+                '</h3>' +
+
+                '<button onclick="aggiungiCarrello(' +
+                    '\'' + colonne[0] + ' ' + colonne[1] + '\'' +
+                    ',' +
+                    '\'' + colonne[4] + '\'' +
+                ')">' +
+
+                    'Aggiungi al carrello' +
+
+                '</button>' +
+
+            '</div>';
+
+        }
+
+    }
+
+}
+
+function aggiungiCarrello(nome, prezzo){
+
+    var prodotto = {
+
+        nome:nome,
+        prezzo:prezzo
+
+    };
+
+    carrello.push(prodotto);
+
+    alert("Prodotto aggiunto al carrello");
 
 }
 
@@ -300,7 +458,8 @@ function mostraCarrello(){
     document.getElementById("paginaCategoria").style.display = "none";
     document.getElementById("contatti").style.display = "none";
 
-    var divCarrello = document.getElementById("carrello");
+    var divCarrello =
+    document.getElementById("carrello");
 
     divCarrello.style.display = "block";
 
