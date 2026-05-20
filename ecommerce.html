@@ -53,65 +53,61 @@
             background-color:#dbe7ff;
         }
 
-        #prodotti{
+        #home{
+            padding:40px;
+        }
+
+        .titolo-home{
+            text-align:center;
+            color:#0047ab;
+            margin-bottom:40px;
+        }
+
+        .categorie{
+            display:flex;
+            justify-content:center;
+            gap:30px;
+            flex-wrap:wrap;
+        }
+
+        .categoria{
+            width:280px;
+            height:200px;
+            background-color:white;
+            border-radius:15px;
+            box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            font-size:24px;
+            font-weight:bold;
+            color:#0047ab;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .categoria:hover{
+            transform:scale(1.05);
+            background-color:#dbe7ff;
+        }
+
+        #paginaCategoria{
+            display:none;
+            padding:30px;
+        }
+
+        .titolo-categoria{
+            text-align:center;
+            color:#0047ab;
+            margin-bottom:30px;
+        }
+
+        #contenutoCategoria{
             display:flex;
             flex-wrap:wrap;
             justify-content:center;
             gap:20px;
-            padding:20px;
-        }
-
-        .card{
-            background-color:white;
-            width:260px;
-            border-radius:10px;
-            overflow:hidden;
-            text-align:center;
-            box-shadow:0px 0px 10px rgba(0,0,0,0.2);
-        }
-
-        .card img{
-            width:100%;
-            height:220px;
-            object-fit:cover;
-        }
-
-        .card h3{
-            margin:10px;
-            color:#0047ab;
-        }
-
-        .card p{
-            padding:5px;
-        }
-
-        .card button{
-            margin-bottom:15px;
-            padding:10px;
-            background-color:#0047ab;
-            color:white;
-            border:none;
-            border-radius:5px;
-            cursor:pointer;
-        }
-
-        .card button:hover{
-            background-color:#002f73;
-        }
-
-        #dettagli{
-            display:none;
-            max-width:700px;
-            margin:auto;
-            background-color:white;
-            padding:20px;
-            border-radius:10px;
-            margin-top:20px;
-        }
-
-        #dettagli img{
-            width:100%;
-            border-radius:10px;
         }
 
         #carrello{
@@ -124,17 +120,6 @@
             margin-top:20px;
         }
 
-        #configurazione{
-            display:none;
-            max-width:700px;
-            margin:auto;
-            background-color:white;
-            padding:20px;
-            border-radius:10px;
-            margin-top:20px;
-            text-align:center;
-        }
-
         #contatti{
             display:none;
             max-width:700px;
@@ -143,11 +128,6 @@
             padding:20px;
             border-radius:10px;
             margin-top:20px;
-        }
-
-        textarea{
-            width:100%;
-            height:200px;
         }
 
         .contatto-box{
@@ -168,12 +148,7 @@
                 gap:15px;
             }
 
-            #prodotti{
-                flex-direction:column;
-                align-items:center;
-            }
-
-            .card{
+            .categoria{
                 width:90%;
             }
 
@@ -207,54 +182,58 @@
                 Contattaci
             </button>
 
-            <button onclick="mostraConfigurazione()">
-                Configurazione
-            </button>
-
         </nav>
 
     </div>
 
 </header>
 
-<div id="prodotti"></div>
+<div id="home">
 
-<div id="dettagli"></div>
+    <h1 class="titolo-home">
+        Benvenuto su InterFans
+    </h1>
 
-<div id="carrello"></div>
+    <div class="categorie">
 
-<div id="configurazione">
+        <div class="categoria" onclick="apriCategoria('Maglie Firmate')">
 
-    <h2>Configurazione CSV</h2>
+            Maglie Firmate
 
-    <p>
-        Inserisci:
-        marca,modello,descrizione,immagine,prezzo
-    </p>
+        </div>
 
-<textarea id="csv">
+        <div class="categoria" onclick="apriCategoria('Palloni Firmati')">
 
-Inter,Lautaro Martinez 10,Maglia ufficiale autografata,https://picsum.photos/300?1,249.99
-Nike,Pallone Champions League,Pallone firmato dai giocatori,https://picsum.photos/300?2,179.99
-Inter,Barella 23,Maglia away autografata,https://picsum.photos/300?3,229.99
+            Palloni Firmati
 
-</textarea>
+        </div>
 
-    <br><br>
+        <div class="categoria" onclick="apriCategoria('Maglie Originali')">
 
-    <button onclick="caricaCSV()">
-        Carica prodotti
-    </button>
+            Maglie Originali
+
+        </div>
+
+    </div>
 
 </div>
+
+<div id="paginaCategoria">
+
+    <h1 class="titolo-categoria" id="titoloCategoria"></h1>
+
+    <div id="contenutoCategoria"></div>
+
+</div>
+
+<div id="carrello"></div>
 
 <div id="contatti">
 
     <h2>Contattaci</h2>
 
     <p>
-        Hai problemi con un ordine oppure vuoi maggiori informazioni
-        sui prodotti firmati?
+        Hai bisogno di informazioni sui prodotti oppure sugli ordini?
     </p>
 
     <div class="contatto-box">
@@ -291,131 +270,34 @@ Inter,Barella 23,Maglia away autografata,https://picsum.photos/300?3,229.99
 
 <script>
 
-var prodotti = [];
-
 var carrello = [];
 
-function caricaCSV(){
+function apriCategoria(nomeCategoria){
 
-    prodotti = [];
-
-    var testo = document.getElementById("csv").value;
-
-    var righe = testo.split("\n");
-
-    for(var i = 0; i < righe.length; i++){
-
-        var colonne = righe[i].split(",");
-
-        if(colonne.length >= 5){
-
-            var prodotto = {
-
-                marca: colonne[0],
-                modello: colonne[1],
-                descrizione: colonne[2],
-                immagine: colonne[3],
-                prezzo: colonne[4]
-
-            };
-
-            prodotti.push(prodotto);
-
-        }
-
-    }
-
-    mostraProdotti();
-
-}
-
-function mostraProdotti(){
-
-    document.getElementById("prodotti").style.display = "flex";
-    document.getElementById("dettagli").style.display = "none";
+    document.getElementById("home").style.display = "none";
     document.getElementById("carrello").style.display = "none";
-    document.getElementById("configurazione").style.display = "none";
     document.getElementById("contatti").style.display = "none";
 
-    var contenitore = document.getElementById("prodotti");
+    document.getElementById("paginaCategoria").style.display = "block";
 
-    contenitore.innerHTML = "";
+    document.getElementById("titoloCategoria").innerHTML = nomeCategoria;
 
-    for(var i = 0; i < prodotti.length; i++){
+    document.getElementById("contenutoCategoria").innerHTML =
 
-        contenitore.innerHTML +=
+    '<h3>' +
+    'Pagina dedicata a: ' + nomeCategoria +
+    '</h3>' +
 
-        '<div class="card">' +
-
-            '<img src="' + prodotti[i].immagine + '">' +
-
-            '<h3>' +
-                prodotti[i].marca +
-                ' ' +
-                prodotti[i].modello +
-            '</h3>' +
-
-            '<p>' +
-                prodotti[i].prezzo +
-                ' €' +
-            '</p>' +
-
-            '<button onclick="vediDettagli(' + i + ')">' +
-                'Dettagli' +
-            '</button>' +
-
-        '</div>';
-
-    }
-
-}
-
-function vediDettagli(index){
-
-    document.getElementById("prodotti").style.display = "none";
-
-    var dettagli = document.getElementById("dettagli");
-
-    dettagli.style.display = "block";
-
-    dettagli.innerHTML =
-
-        '<img src="' + prodotti[index].immagine + '">' +
-
-        '<h2>' +
-            prodotti[index].marca +
-            ' ' +
-            prodotti[index].modello +
-        '</h2>' +
-
-        '<p>' +
-            prodotti[index].descrizione +
-        '</p>' +
-
-        '<h3>' +
-            prodotti[index].prezzo +
-            ' €' +
-        '</h3>' +
-
-        '<button onclick="aggiungiCarrello(' + index + ')">' +
-            'Aggiungi al carrello' +
-        '</button>';
-
-}
-
-function aggiungiCarrello(index){
-
-    carrello.push(prodotti[index]);
-
-    alert("Prodotto aggiunto al carrello");
+    '<p>' +
+    'Qui verranno mostrati i prodotti della categoria.' +
+    '</p>';
 
 }
 
 function mostraCarrello(){
 
-    document.getElementById("prodotti").style.display = "none";
-    document.getElementById("dettagli").style.display = "none";
-    document.getElementById("configurazione").style.display = "none";
+    document.getElementById("home").style.display = "none";
+    document.getElementById("paginaCategoria").style.display = "none";
     document.getElementById("contatti").style.display = "none";
 
     var divCarrello = document.getElementById("carrello");
@@ -434,9 +316,7 @@ function mostraCarrello(){
 
         '<p>' +
 
-            carrello[i].marca +
-            ' ' +
-            carrello[i].modello +
+            carrello[i].nome +
 
             ' - ' +
 
@@ -461,23 +341,11 @@ function mostraCarrello(){
 
 }
 
-function mostraConfigurazione(){
-
-    document.getElementById("prodotti").style.display = "none";
-    document.getElementById("dettagli").style.display = "none";
-    document.getElementById("carrello").style.display = "none";
-    document.getElementById("contatti").style.display = "none";
-
-    document.getElementById("configurazione").style.display = "block";
-
-}
-
 function mostraContatti(){
 
-    document.getElementById("prodotti").style.display = "none";
-    document.getElementById("dettagli").style.display = "none";
+    document.getElementById("home").style.display = "none";
+    document.getElementById("paginaCategoria").style.display = "none";
     document.getElementById("carrello").style.display = "none";
-    document.getElementById("configurazione").style.display = "none";
 
     document.getElementById("contatti").style.display = "block";
 
@@ -485,11 +353,13 @@ function mostraContatti(){
 
 function mostraHome(){
 
-    mostraProdotti();
+    document.getElementById("home").style.display = "block";
+
+    document.getElementById("paginaCategoria").style.display = "none";
+    document.getElementById("carrello").style.display = "none";
+    document.getElementById("contatti").style.display = "none";
 
 }
-
-caricaCSV();
 
 </script>
 
