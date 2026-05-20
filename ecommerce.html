@@ -1,140 +1,139 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>E-Commerce CSV</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+    <title>E-Commerce ES1999</title>
 
-body{
-    margin:0;
-    font-family:Arial;
-    background-color:#f2f2f2;
-}
+    <style>
 
-header{
-    background-color:#222;
-    color:white;
-    padding:20px;
-    text-align:center;
-}
+        body{
+            margin:0;
+            font-family:Arial;
+            background-color:#f0f0f0;
+        }
 
-nav{
-    margin-top:10px;
-}
+        header{
+            background-color:#222;
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
 
-nav button{
-    margin:5px;
-    padding:10px;
-    border:none;
-    cursor:pointer;
-    border-radius:5px;
-}
+        nav{
+            margin-top:10px;
+        }
 
-#contenitore{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:20px;
-    padding:20px;
-}
+        nav button{
+            padding:10px;
+            margin:5px;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+        }
 
-.card{
-    background-color:white;
-    width:250px;
-    border-radius:10px;
-    overflow:hidden;
-    box-shadow:0px 0px 10px rgba(0,0,0,0.2);
-    text-align:center;
-}
+        #prodotti{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:20px;
+            padding:20px;
+        }
 
-.card img{
-    width:100%;
-    height:200px;
-    object-fit:cover;
-}
+        .card{
+            background-color:white;
+            width:250px;
+            border-radius:10px;
+            overflow:hidden;
+            text-align:center;
+            box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+        }
 
-.card h3{
-    margin:10px;
-}
+        .card img{
+            width:100%;
+            height:200px;
+            object-fit:cover;
+        }
 
-.card p{
-    padding:5px;
-}
+        .card h3{
+            margin:10px;
+        }
 
-.card button{
-    margin-bottom:15px;
-    padding:10px;
-    border:none;
-    background-color:#28a745;
-    color:white;
-    cursor:pointer;
-    border-radius:5px;
-}
+        .card p{
+            padding:5px;
+        }
 
-#dettagli{
-    max-width:700px;
-    margin:auto;
-    background-color:white;
-    padding:20px;
-    border-radius:10px;
-    margin-top:20px;
-    display:none;
-}
+        .card button{
+            margin-bottom:15px;
+            padding:10px;
+            background-color:green;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+        }
 
-#dettagli img{
-    width:100%;
-    border-radius:10px;
-}
+        #dettagli{
+            display:none;
+            max-width:700px;
+            margin:auto;
+            background-color:white;
+            padding:20px;
+            border-radius:10px;
+            margin-top:20px;
+        }
 
-#carrello{
-    max-width:700px;
-    margin:auto;
-    background-color:white;
-    padding:20px;
-    border-radius:10px;
-    margin-top:20px;
-    display:none;
-}
+        #dettagli img{
+            width:100%;
+            border-radius:10px;
+        }
 
-#configurazione{
-    max-width:600px;
-    margin:auto;
-    background-color:white;
-    padding:20px;
-    border-radius:10px;
-    margin-top:20px;
-    text-align:center;
-    display:none;
-}
+        #carrello{
+            display:none;
+            max-width:700px;
+            margin:auto;
+            background-color:white;
+            padding:20px;
+            border-radius:10px;
+            margin-top:20px;
+        }
 
-textarea{
-    width:100%;
-    height:200px;
-}
+        #configurazione{
+            display:none;
+            max-width:700px;
+            margin:auto;
+            background-color:white;
+            padding:20px;
+            border-radius:10px;
+            margin-top:20px;
+            text-align:center;
+        }
 
-#totale{
-    text-align:center;
-}
+        textarea{
+            width:100%;
+            height:200px;
+        }
 
-@media(max-width:600px){
+        @media(max-width:600px){
 
-    #contenitore{
-        flex-direction:column;
-        align-items:center;
-    }
+            #prodotti{
+                flex-direction:column;
+                align-items:center;
+            }
 
-    .card{
-        width:90%;
-    }
+            .card{
+                width:90%;
+            }
 
-}
+        }
 
-</style>
+    </style>
 
 </head>
+
 <body>
 
 <header>
@@ -152,14 +151,14 @@ textarea{
         </button>
 
         <button onclick="mostraConfigurazione()">
-            Configurazione CSV
+            Configurazione
         </button>
 
     </nav>
 
 </header>
 
-<div id="contenitore"></div>
+<div id="prodotti"></div>
 
 <div id="dettagli"></div>
 
@@ -167,14 +166,14 @@ textarea{
 
 <div id="configurazione">
 
-    <h2>Inserisci CSV</h2>
+    <h2>Configurazione CSV</h2>
 
     <p>
-        Formato:
+        Inserisci:
         marca,modello,descrizione,immagine,prezzo
     </p>
 
-<textarea id="csvInput">
+<textarea id="csv">
 
 Logitech,G203,Mouse gaming RGB,https://picsum.photos/300?1,29.99
 Razer,BlackWidow,Tastiera meccanica RGB,https://picsum.photos/300?2,89.99
@@ -185,32 +184,32 @@ HyperX,Cloud II,Cuffie gaming surround,https://picsum.photos/300?3,69.99
     <br><br>
 
     <button onclick="caricaCSV()">
-        Carica Prodotti
+        Carica prodotti
     </button>
 
 </div>
 
 <script>
 
-let prodotti = [];
+var prodotti = [];
 
-let carrello = [];
+var carrello = [];
 
 function caricaCSV(){
 
     prodotti = [];
 
-    let testo = document.getElementById("csvInput").value;
+    var testo = document.getElementById("csv").value;
 
-    let righe = testo.trim().split("\n");
+    var righe = testo.split("\n");
 
-    righe.forEach(riga => {
+    for(var i = 0; i < righe.length; i++){
 
-        let colonne = riga.split(",");
+        var colonne = righe[i].split(",");
 
         if(colonne.length >= 5){
 
-            let prodotto = {
+            var prodotto = {
 
                 marca: colonne[0],
                 modello: colonne[1],
@@ -224,83 +223,82 @@ function caricaCSV(){
 
         }
 
-    });
+    }
 
     mostraProdotti();
-
-    alert("Prodotti caricati");
 
 }
 
 function mostraProdotti(){
 
-    document.getElementById("contenitore").style.display = "flex";
+    document.getElementById("prodotti").style.display = "flex";
     document.getElementById("dettagli").style.display = "none";
     document.getElementById("carrello").style.display = "none";
     document.getElementById("configurazione").style.display = "none";
 
-    let contenitore = document.getElementById("contenitore");
+    var contenitore = document.getElementById("prodotti");
 
     contenitore.innerHTML = "";
 
-    prodotti.forEach((prodotto, index) => {
+    for(var i = 0; i < prodotti.length; i++){
 
-        contenitore.innerHTML += `
+        contenitore.innerHTML +=
 
-        <div class="card">
+        '<div class="card">' +
 
-            <img src="${prodotto.immagine}">
+            '<img src="' + prodotti[i].immagine + '">' +
 
-            <h3>
-                ${prodotto.marca} ${prodotto.modello}
-            </h3>
+            '<h3>' +
+                prodotti[i].marca +
+                ' ' +
+                prodotti[i].modello +
+            '</h3>' +
 
-            <p>
-                ${prodotto.prezzo} €
-            </p>
+            '<p>' +
+                prodotti[i].prezzo +
+                ' €' +
+            '</p>' +
 
-            <button onclick="vediDettagli(${index})">
-                Dettagli
-            </button>
+            '<button onclick="vediDettagli(' + i + ')">' +
+                'Dettagli' +
+            '</button>' +
 
-        </div>
+        '</div>';
 
-        `;
-
-    });
+    }
 
 }
 
 function vediDettagli(index){
 
-    document.getElementById("contenitore").style.display = "none";
-    document.getElementById("dettagli").style.display = "block";
+    document.getElementById("prodotti").style.display = "none";
 
-    let prodotto = prodotti[index];
+    var dettagli = document.getElementById("dettagli");
 
-    let dettagli = document.getElementById("dettagli");
+    dettagli.style.display = "block";
 
-    dettagli.innerHTML = `
+    dettagli.innerHTML =
 
-        <img src="${prodotto.immagine}">
+        '<img src="' + prodotti[index].immagine + '">' +
 
-        <h2>
-            ${prodotto.marca} ${prodotto.modello}
-        </h2>
+        '<h2>' +
+            prodotti[index].marca +
+            ' ' +
+            prodotti[index].modello +
+        '</h2>' +
 
-        <p>
-            ${prodotto.descrizione}
-        </p>
+        '<p>' +
+            prodotti[index].descrizione +
+        '</p>' +
 
-        <h3>
-            ${prodotto.prezzo} €
-        </h3>
+        '<h3>' +
+            prodotti[index].prezzo +
+            ' €' +
+        '</h3>' +
 
-        <button onclick="aggiungiCarrello(${index})">
-            Aggiungi al carrello
-        </button>
-
-    `;
+        '<button onclick="aggiungiCarrello(' + index + ')">' +
+            'Aggiungi al carrello' +
+        '</button>';
 
 }
 
@@ -314,54 +312,56 @@ function aggiungiCarrello(index){
 
 function mostraCarrello(){
 
-    document.getElementById("contenitore").style.display = "none";
+    document.getElementById("prodotti").style.display = "none";
     document.getElementById("dettagli").style.display = "none";
     document.getElementById("configurazione").style.display = "none";
 
-    let divCarrello = document.getElementById("carrello");
+    var divCarrello = document.getElementById("carrello");
 
     divCarrello.style.display = "block";
 
-    let totale = 0;
+    var totale = 0;
 
     divCarrello.innerHTML = "<h2>Carrello</h2>";
 
-    carrello.forEach(prodotto => {
+    for(var i = 0; i < carrello.length; i++){
 
-        totale += parseFloat(prodotto.prezzo);
+        totale += parseFloat(carrello[i].prezzo);
 
-        divCarrello.innerHTML += `
+        divCarrello.innerHTML +=
 
-        <p>
+        '<p>' +
 
-            ${prodotto.marca}
-            ${prodotto.modello}
+            carrello[i].marca +
+            ' ' +
+            carrello[i].modello +
 
-            - ${prodotto.prezzo} €
+            ' - ' +
 
-        </p>
+            carrello[i].prezzo +
+            ' €' +
 
-        `;
+        '</p>';
 
-    });
+    }
 
-    divCarrello.innerHTML += `
+    divCarrello.innerHTML +=
 
-        <h3 id="totale">
-            Totale: ${totale.toFixed(2)} €
-        </h3>
+    '<h3>' +
+        'Totale: ' +
+        totale.toFixed(2) +
+        ' €' +
+    '</h3>' +
 
-        <button onclick="window.print()">
-            Stampa PDF
-        </button>
-
-    `;
+    '<button onclick="window.print()">' +
+        'Stampa PDF' +
+    '</button>';
 
 }
 
 function mostraConfigurazione(){
 
-    document.getElementById("contenitore").style.display = "none";
+    document.getElementById("prodotti").style.display = "none";
     document.getElementById("dettagli").style.display = "none";
     document.getElementById("carrello").style.display = "none";
 
