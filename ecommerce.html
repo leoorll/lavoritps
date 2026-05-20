@@ -8,18 +8,22 @@
 
 <title>InterFans</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 
 body{
     margin:0;
-    font-family:Arial;
-    background-color:#e9eef5;
+    font-family:'Poppins', sans-serif;
+    background:linear-gradient(to bottom,#02142b,#003c8f);
+    min-height:100vh;
 }
 
 header{
-    background:linear-gradient(to right,#000000,#0047ab);
+    background:linear-gradient(to right,#000000,#0057d9);
     color:white;
     padding:20px;
+    box-shadow:0px 2px 10px rgba(0,0,0,0.4);
 }
 
 .topbar{
@@ -30,7 +34,7 @@ header{
 }
 
 .logo{
-    font-size:32px;
+    font-size:35px;
     font-weight:bold;
 }
 
@@ -42,15 +46,17 @@ nav{
 nav button{
     padding:10px 15px;
     border:none;
-    border-radius:5px;
+    border-radius:8px;
     cursor:pointer;
     background-color:white;
     color:#0047ab;
     font-weight:bold;
+    transition:0.3s;
 }
 
 nav button:hover{
-    background-color:#dbe7ff;
+    background-color:#99c2ff;
+    transform:scale(1.05);
 }
 
 #home{
@@ -59,8 +65,9 @@ nav button:hover{
 
 .titolo-home{
     text-align:center;
-    color:#0047ab;
+    color:white;
     margin-bottom:40px;
+    font-size:40px;
 }
 
 .box-home{
@@ -68,8 +75,8 @@ nav button:hover{
     max-width:700px;
     margin:auto;
     padding:30px;
-    border-radius:15px;
-    box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+    border-radius:20px;
+    box-shadow:0px 0px 20px rgba(0,0,0,0.3);
 }
 
 .box-home h2{
@@ -80,8 +87,9 @@ select{
     width:100%;
     padding:12px;
     margin-top:10px;
-    border-radius:5px;
+    border-radius:8px;
     border:1px solid gray;
+    font-family:'Poppins', sans-serif;
 }
 
 .drag-area{
@@ -97,6 +105,16 @@ select{
     margin-top:15px;
 }
 
+.drag-area button{
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(to right,#003c8f,#007bff);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
 #paginaCategoria{
     display:none;
     padding:30px;
@@ -104,11 +122,12 @@ select{
 
 .titolo-categoria{
     text-align:center;
-    color:#0047ab;
+    color:white;
+    font-size:35px;
 }
 
 #contenutoCategoria{
-    max-width:900px;
+    max-width:1100px;
     margin:auto;
     margin-top:30px;
     display:flex;
@@ -120,10 +139,15 @@ select{
 .card{
     background-color:white;
     width:250px;
-    border-radius:10px;
+    border-radius:15px;
     overflow:hidden;
     text-align:center;
-    box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+    box-shadow:0px 0px 15px rgba(0,0,0,0.3);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
 }
 
 .card img{
@@ -134,16 +158,27 @@ select{
 
 .card h3{
     color:#0047ab;
+    padding:5px;
+}
+
+.card p{
+    padding:10px;
 }
 
 .card button{
     margin-bottom:15px;
     padding:10px;
     border:none;
-    border-radius:5px;
-    background-color:#0047ab;
+    border-radius:8px;
+    background:linear-gradient(to right,#003c8f,#007bff);
     color:white;
     cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.card button:hover{
+    transform:scale(1.05);
 }
 
 #carrello{
@@ -152,8 +187,22 @@ select{
     margin:auto;
     background-color:white;
     padding:20px;
-    border-radius:10px;
+    border-radius:20px;
     margin-top:20px;
+    box-shadow:0px 0px 15px rgba(0,0,0,0.3);
+}
+
+#carrello h2{
+    color:#0047ab;
+}
+
+#carrello button{
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(to right,#003c8f,#007bff);
+    color:white;
+    font-weight:bold;
 }
 
 #contatti{
@@ -162,8 +211,13 @@ select{
     margin:auto;
     background-color:white;
     padding:20px;
-    border-radius:10px;
+    border-radius:20px;
     margin-top:20px;
+    box-shadow:0px 0px 15px rgba(0,0,0,0.3);
+}
+
+#contatti h2{
+    color:#0047ab;
 }
 
 .contatto-box{
@@ -171,6 +225,10 @@ select{
     padding:15px;
     border-radius:10px;
     margin-top:15px;
+}
+
+.contatto-box h3{
+    color:#0047ab;
 }
 
 @media(max-width:600px){
@@ -419,11 +477,11 @@ function apriCategoria(nomeCategoria, testoCSV){
                     ' €' +
                 '</h3>' +
 
-                '<button onclick="aggiungiCarrello(' +
-                    '\'' + colonne[0] + ' ' + colonne[1] + '\'' +
-                    ',' +
-                    '\'' + colonne[4] + '\'' +
-                ')">' +
+                '<button onclick="aggiungiCarrello(`' +
+                    colonne[0] + ' ' + colonne[1] +
+                    '`,`' +
+                    colonne[4] +
+                '`)">' +
 
                     'Aggiungi al carrello' +
 
@@ -441,14 +499,14 @@ function aggiungiCarrello(nome, prezzo){
 
     var prodotto = {
 
-        nome:nome,
-        prezzo:prezzo
+        nome: nome,
+        prezzo: parseFloat(prezzo)
 
     };
 
     carrello.push(prodotto);
 
-    alert("Prodotto aggiunto al carrello");
+    alert(nome + " aggiunto al carrello");
 
 }
 
@@ -469,7 +527,7 @@ function mostraCarrello(){
 
     for(var i = 0; i < carrello.length; i++){
 
-        totale += parseFloat(carrello[i].prezzo);
+        totale += carrello[i].prezzo;
 
         divCarrello.innerHTML +=
 
@@ -479,7 +537,7 @@ function mostraCarrello(){
 
             ' - ' +
 
-            carrello[i].prezzo +
+            carrello[i].prezzo.toFixed(2) +
             ' €' +
 
         '</p>';
@@ -492,7 +550,7 @@ function mostraCarrello(){
         'Totale: ' +
         totale.toFixed(2) +
         ' €' +
-    '</h3>' +
+    '</h3><br>' +
 
     '<button onclick="window.print()">' +
         'Stampa PDF' +
