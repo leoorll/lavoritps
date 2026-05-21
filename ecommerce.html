@@ -76,24 +76,10 @@ nav button:hover{
     border-radius:20px;
 }
 
-.box-home h2{
-    color:#0047ab;
-}
-
-select{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border-radius:8px;
-    border:1px solid gray;
-    font-family:'Poppins', sans-serif;
-}
-
 .drag-area{
     border:3px dashed #0047ab;
     padding:40px;
     text-align:center;
-    margin-top:30px;
     border-radius:10px;
     background-color:#f7faff;
 }
@@ -247,33 +233,15 @@ select{
 
     <div class="box-home">
 
-        <h2>Seleziona categoria CSV</h2>
-
-        <select id="categoriaCSV" onchange="cambiaCategoria()">
-
-            <option value="">
-                -- Seleziona categoria --
-            </option>
-
-            <option value="Maglie Firmate">
-                Maglie Firmate
-            </option>
-
-            <option value="Palloni Firmati">
-                Palloni Firmati
-            </option>
-
-            <option value="Maglie Originali">
-                Maglie Originali
-            </option>
-
-        </select>
-
         <div class="drag-area">
 
-            <h3>
+            <h2>
                 Carica il tuo file CSV
-            </h3>
+            </h2>
+
+            <p>
+                Seleziona un file CSV con i prodotti
+            </p>
 
             <input type="file" id="csvFile" accept=".csv">
 
@@ -303,26 +271,23 @@ select{
 
     <h2>Contattaci</h2>
 
-    <p>Email: interfansshop@gmail.com</p>
+    <div class="contatto-box">
+        <p>Email: interfansshop@gmail.com</p>
+    </div>
 
-    <p>Telefono: +39 02 82719080</p>
+    <div class="contatto-box">
+        <p>Telefono: +39 02 12345678</p>
+    </div>
 
-    <p>Milano - Zona San Siro</p>
+    <div class="contatto-box">
+        <p>Milano - Zona San Siro</p>
+    </div>
 
 </div>
 
 <script>
 
 var carrello = [];
-
-var categoriaAttiva = "";
-
-function cambiaCategoria(){
-
-    categoriaAttiva =
-    document.getElementById("categoriaCSV").value;
-
-}
 
 function caricaCSV(){
 
@@ -336,20 +301,13 @@ function caricaCSV(){
 
     }
 
-    if(categoriaAttiva == ""){
-
-        alert("Seleziona una categoria");
-        return;
-
-    }
-
     var reader = new FileReader();
 
     reader.onload = function(evento){
 
         var testo = evento.target.result;
 
-        apriCategoria(categoriaAttiva, testo);
+        apriCategoria("Prodotti InterFans", testo);
 
     };
 
@@ -475,7 +433,7 @@ function mostraCarrello(){
 
     '<h3>' +
         'Totale: ' +
-        totale +
+        totale.toFixed(2) +
         ' €' +
     '</h3><br>' +
 
