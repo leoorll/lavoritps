@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andamento Nazionale COVID-19</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 35px;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .pagina {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a, #1d4ed8);
+            color: white;
+            padding: 35px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+        }
+
+        .etichetta {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            color: #bfdbfe;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 30px;
+            margin: 18px 0 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            color: #dbeafe;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .sezione-tabella {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+        }
+
+        .titolo-tabella {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin: 0;
+            color: #0f172a;
+        }
+
+        .fonte {
+            font-size: 12px;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        #dati-container {
+            overflow: auto;
+            max-height: 70vh;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        th, td {
+            padding: 13px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #1e40af;
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        th:first-child {
+            border-top-left-radius: 8px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        tbody tr:nth-child(odd) {
+            background: white;
+        }
+
+        tbody tr:hover {
+            background: #dbeafe;
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .errore {
+            color: #b91c1c;
+            background: #fef2f2;
+            padding: 18px;
+            border-radius: 8px;
+            border: 1px solid #fecaca;
+        }
+
+        .caricamento {
+            color: #64748b;
+            padding: 25px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            header {
+                padding: 24px;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+
+            .sezione-tabella {
+                padding: 15px;
+            }
+
+            th, td {
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pagina">
+
+        <header>
+            <span class="etichetta">Dashboard epidemiologica</span>
+            <h1>Andamento Nazionale COVID-19</h1>
+            <p>
+                Consultazione dei dati nazionali relativi
+                all'andamento dell'emergenza COVID-19 in Italia.
+            </p>
+        </header>
+
+        <main class="sezione-tabella">
+
+            <div class="titolo-tabella">
+                <h2>Archivio dei dati nazionali</h2>
+                <span class="fonte">Fonte: Protezione Civile</span>
+            </div>
+
+            <div id="dati-container" class="caricamento">
+                Caricamento dei dati in corso...
+            </div>
+
+        </main>
+
+        <footer>
+            Dati provenienti dal repository pubblico COVID-19
+            della Protezione Civile.
+        </footer>
+
+    </div>
+
+    <script>
+        var url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json";
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", url, true);
+
+        xhr.onreadystatechange = function() {
+
+            if (xhr.readyState === 4) {
+
+                var contenitore =
+                    document.getElementById("dati-container");
+
+                if (xhr.status === 200) {
+
+                    try {
+
+                        var dati = JSON.parse(xhr.responseText);
+
+                        if (dati.length === 0) {
+                            contenitore.textContent =
+                                "Nessun dato disponibile.";
+                            return;
+                        }
+
+                        var obj = dati[0];
+                        var numeroChiavi = Object.keys(obj).length;
+                        var keys = Object.keys(obj);
+
+                        var tabella = document.createElement("table");
+                        var thead = document.createElement("thead");
+                        var tbody = document.createElement("tbody");
+
+                        var trIntestazione =
+                            document.createElement("tr");
+
+                        for (var i = 0; i < numeroChiavi; i++) {
+
+                            var th = document.createElement("th");
+                            th.textContent = keys[i];
+                            trIntestazione.appendChild(th);
+                        }
+
+                        thead.appendChild(trIntestazione);
+                        tabella.appendChild(thead);
+
+                        for (var i = 0; i < dati.length; i++) {
+
+                            var row = dati[i];
+                            var tr = document.createElement("tr");
+
+                            for (var j = 0; j < numeroChiavi; j++) {
+
+                                var td = document.createElement("td");
+                                var chiave = keys[j];
+                                var valore = row[chiave];
+
+                                td.textContent =
+                                    valore !== undefined &&
+                                    valore !== null
+                                    ? valore
+                                    : "";
+
+                                tr.appendChild(td);
+                            }
+
+                            tbody.appendChild(tr);
+                        }
+
+                        tabella.appendChild(tbody);
+
+                        contenitore.className = "";
+                        contenitore.textContent = "";
+                        contenitore.appendChild(tabella);
+
+                    } catch (errore) {
+
+                        contenitore.textContent =
+                            "Errore durante l'elaborazione dei dati.";
+
+                        contenitore.className = "errore";
+                    }
+
+                } else {
+
+                    contenitore.textContent =
+                        "Errore HTTP: " + xhr.status;
+
+                    contenitore.className = "errore";
+                }
+            }
+        };
+
+        xhr.onerror = function() {
+
+            var contenitore =
+                document.getElementById("dati-container");
+
+            contenitore.textContent =
+                "Errore di rete durante il caricamento.";
+
+            contenitore.className = "errore";
+        };
+
+        xhr.send();
+    </script>
+
+</body>
+</html>
