@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -184,6 +185,7 @@
                             return;
                         }
 
+                        var primoDato = dati[0];
                         var chiavi = Object.keys(primoDato);
 
                         var tabella = document.createElement("table");
@@ -236,8 +238,10 @@
 
                     } catch (errore) {
 
-                        contenitore.textContent = "Errore nella lettura dei dati.";
+                        contenitore.textContent = "Errore nella lettura dei dati: " + errore.message;
                         contenitore.className = "errore";
+
+                        console.log(errore);
                     }
 
                 } else {
