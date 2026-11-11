@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andamento Nazionale COVID-19</title>
+    <title>Andamento COVID-19 in Italia</title>
 
     <style>
         * {
@@ -11,154 +11,102 @@
         }
 
         body {
-            font-family: "Segoe UI", Arial, sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 35px;
-            background: #f1f5f9;
+            padding: 30px;
+            background-color: #f1f5f9;
             color: #1e293b;
         }
 
         .pagina {
             max-width: 1400px;
-            margin: 0 auto;
+            margin: auto;
         }
 
         header {
             background: linear-gradient(135deg, #0f172a, #1d4ed8);
             color: white;
-            padding: 35px;
-            border-radius: 16px;
+            padding: 30px;
+            border-radius: 15px;
             margin-bottom: 25px;
-            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
-        }
-
-        .etichetta {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            color: #bfdbfe;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
         }
 
         h1 {
             font-size: 30px;
-            margin: 18px 0 10px;
-            font-weight: 700;
+            margin-top: 15px;
         }
 
         header p {
             color: #dbeafe;
-            margin: 0;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
-        .sezione-tabella {
-            background: white;
+        .tabella {
+            background-color: white;
             padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
-        }
-
-        .titolo-tabella {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 18px;
+            border-radius: 15px;
         }
 
         h2 {
             font-size: 20px;
-            margin: 0;
             color: #0f172a;
         }
 
         .fonte {
             font-size: 12px;
             color: #64748b;
-            background: #f1f5f9;
-            padding: 8px 12px;
-            border-radius: 8px;
         }
 
-        #dati-container {
+        #dati {
             overflow: auto;
             max-height: 70vh;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #ddd;
             border-radius: 10px;
         }
 
         table {
-            border-collapse: separate;
-            border-spacing: 0;
+            border-collapse: collapse;
             width: 100%;
             font-size: 13px;
             white-space: nowrap;
         }
 
         th, td {
-            padding: 13px 16px;
+            padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #ddd;
         }
 
         th {
-            background: #1e40af;
+            background-color: #1e40af;
             color: white;
-            font-weight: 600;
             position: sticky;
             top: 0;
-            z-index: 1;
-        }
-
-        th:first-child {
-            border-top-left-radius: 8px;
-        }
-
-        th:last-child {
-            border-top-right-radius: 8px;
         }
 
         tbody tr:nth-child(even) {
-            background: #f8fafc;
-        }
-
-        tbody tr:nth-child(odd) {
-            background: white;
+            background-color: #f1f5f9;
         }
 
         tbody tr:hover {
-            background: #dbeafe;
-            transition: background 0.2s ease;
-        }
-
-        tbody tr:last-child td {
-            border-bottom: none;
+            background-color: #dbeafe;
         }
 
         .errore {
-            color: #b91c1c;
-            background: #fef2f2;
-            padding: 18px;
-            border-radius: 8px;
-            border: 1px solid #fecaca;
+            color: red;
+            padding: 20px;
         }
 
         .caricamento {
-            color: #64748b;
-            padding: 25px;
+            padding: 20px;
             text-align: center;
+            color: gray;
         }
 
         footer {
             text-align: center;
             margin-top: 20px;
-            color: #94a3b8;
+            color: gray;
             font-size: 12px;
         }
 
@@ -168,19 +116,15 @@
             }
 
             header {
-                padding: 24px;
+                padding: 20px;
             }
 
             h1 {
                 font-size: 23px;
             }
 
-            .sezione-tabella {
+            .tabella {
                 padding: 15px;
-            }
-
-            th, td {
-                padding: 10px 12px;
             }
         }
     </style>
@@ -191,105 +135,100 @@
     <div class="pagina">
 
         <header>
-            <span class="etichetta">Dashboard epidemiologica</span>
-            <h1>Andamento Nazionale COVID-19</h1>
+            <h1>Andamento COVID-19 in Italia</h1>
             <p>
-                Consultazione dei dati nazionali relativi
-                all'andamento dell'emergenza COVID-19 in Italia.
+                In questa pagina è possibile vedere i dati
+                relativi all'andamento del COVID-19 in Italia.
             </p>
         </header>
 
-        <main class="sezione-tabella">
+        <main class="tabella">
 
-            <div class="titolo-tabella">
-                <h2>Archivio dei dati nazionali</h2>
-                <span class="fonte">Fonte: Protezione Civile</span>
-            </div>
+            <h2>Dati nazionali</h2>
+            <p class="fonte">Fonte: Protezione Civile</p>
 
-            <div id="dati-container" class="caricamento">
-                Caricamento dei dati in corso...
+            <div id="dati" class="caricamento">
+                Caricamento dei dati...
             </div>
 
         </main>
 
         <footer>
-            Dati provenienti dal repository pubblico COVID-19
-            della Protezione Civile.
+            Dati presi dal sito pubblico della Protezione Civile.
         </footer>
 
     </div>
 
     <script>
+
         var url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json";
 
-        var xhr = new XMLHttpRequest();
+        var richiesta = new XMLHttpRequest();
 
-        xhr.open("GET", url, true);
+        richiesta.open("GET", url, true);
 
-        xhr.onreadystatechange = function() {
+        richiesta.onreadystatechange = function() {
 
-            if (xhr.readyState === 4) {
+            if (richiesta.readyState == 4) {
 
-                var contenitore =
-                    document.getElementById("dati-container");
+                var contenitore = document.getElementById("dati");
 
-                if (xhr.status === 200) {
+                if (richiesta.status == 200) {
 
                     try {
 
-                        var dati = JSON.parse(xhr.responseText);
+                        var dati = JSON.parse(richiesta.responseText);
 
-                        if (dati.length === 0) {
-                            contenitore.textContent =
-                                "Nessun dato disponibile.";
+                        if (dati.length == 0) {
+                            contenitore.textContent = "Nessun dato disponibile.";
                             return;
                         }
 
-                        var obj = dati[0];
-                        var numeroChiavi = Object.keys(obj).length;
-                        var keys = Object.keys(obj);
+                        var chiavi = Object.keys(primoDato);
 
                         var tabella = document.createElement("table");
-                        var thead = document.createElement("thead");
-                        var tbody = document.createElement("tbody");
 
-                        var trIntestazione =
-                            document.createElement("tr");
+                        var intestazione = document.createElement("thead");
+                        var corpo = document.createElement("tbody");
 
-                        for (var i = 0; i < numeroChiavi; i++) {
+                        var riga = document.createElement("tr");
 
-                            var th = document.createElement("th");
-                            th.textContent = keys[i];
-                            trIntestazione.appendChild(th);
+                        for (var i = 0; i < chiavi.length; i++) {
+
+                            var colonna = document.createElement("th");
+
+                            colonna.textContent = chiavi[i];
+
+                            riga.appendChild(colonna);
                         }
 
-                        thead.appendChild(trIntestazione);
-                        tabella.appendChild(thead);
+                        intestazione.appendChild(riga);
+                        tabella.appendChild(intestazione);
 
                         for (var i = 0; i < dati.length; i++) {
 
-                            var row = dati[i];
-                            var tr = document.createElement("tr");
+                            var rigaDati = document.createElement("tr");
 
-                            for (var j = 0; j < numeroChiavi; j++) {
+                            for (var j = 0; j < chiavi.length; j++) {
 
-                                var td = document.createElement("td");
-                                var chiave = keys[j];
-                                var valore = row[chiave];
+                                var cella = document.createElement("td");
 
-                                td.textContent =
-                                    valore !== undefined &&
-                                    valore !== null
-                                    ? valore
-                                    : "";
+                                var nome = chiavi[j];
+                                var valore = dati[i][nome];
 
-                                tr.appendChild(td);
+                                if (valore != null) {
+                                    cella.textContent = valore;
+                                } else {
+                                    cella.textContent = "";
+                                }
+
+                                rigaDati.appendChild(cella);
                             }
 
-                            tbody.appendChild(tr);
+                            corpo.appendChild(rigaDati);
                         }
 
-                        tabella.appendChild(tbody);
+                        tabella.appendChild(corpo);
 
                         contenitore.className = "";
                         contenitore.textContent = "";
@@ -297,34 +236,28 @@
 
                     } catch (errore) {
 
-                        contenitore.textContent =
-                            "Errore durante l'elaborazione dei dati.";
-
+                        contenitore.textContent = "Errore nella lettura dei dati.";
                         contenitore.className = "errore";
                     }
 
                 } else {
 
-                    contenitore.textContent =
-                        "Errore HTTP: " + xhr.status;
-
+                    contenitore.textContent = "Errore nel caricamento: " + richiesta.status;
                     contenitore.className = "errore";
                 }
             }
         };
 
-        xhr.onerror = function() {
+        richiesta.onerror = function() {
 
-            var contenitore =
-                document.getElementById("dati-container");
+            var contenitore = document.getElementById("dati");
 
-            contenitore.textContent =
-                "Errore di rete durante il caricamento.";
-
+            contenitore.textContent = "Errore di connessione.";
             contenitore.className = "errore";
         };
 
-        xhr.send();
+        richiesta.send();
+
     </script>
 
 </body>
